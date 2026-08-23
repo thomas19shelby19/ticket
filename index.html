@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#abd6d2">
+<title>Number_ticket</title>
+<link rel="manifest" href="./manifest.json">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{background:#abd6d2;color:#222;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+.app{width:390px;height:844px;margin:0 auto;padding:62px 17px 30px}
+.card{width:356px;height:77px;background:#fff;border-radius:17px;box-shadow:0 2px 6px rgba(0,0,0,.15);padding:0 17px;margin:0 0 12px}
+input{display:block;width:100%;height:77px;border:0;outline:0;background:transparent;padding:0 5px;font:400 22px/1 inherit;color:#222;-webkit-appearance:none;appearance:none;-webkit-text-size-adjust:100%;text-size-adjust:100%;border-radius:0}
+input::placeholder{color:#c9c9c9;opacity:1}
+.next{display:block;width:356px;height:47px;border:0;border-radius:10px;background:linear-gradient(100deg,#48c64d,#139fc0);color:#fff;font:400 24px/47px inherit;text-align:center;cursor:pointer;padding:0;-webkit-appearance:none;appearance:none;touch-action:manipulation}
+.error{color:#c62828;font-size:14px;margin:-3px 4px 12px;display:none}
+@media(max-width:389px){.app{width:100%;padding-left:17px;padding-right:17px}.card,.next{width:100%}}
+</style>
+</head>
+<body>
+<main class="app">
+  <div class="card"><input id="transportNumber" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Номер" maxlength="4" autocomplete="off" aria-label="Номер транспорту"></div>
+  <div id="error" class="error"></div>
+  <button class="next" type="button" onclick="openScanner()">Далі</button>
+</main>
+<script>
+const input=document.getElementById("transportNumber");
+const error=document.getElementById("error");
+input.addEventListener("input",()=>{
+  input.value=input.value.replace(/\D/g,"").slice(0,4);
+  error.style.display="none";
+});
+function openScanner(){
+  const n=input.value.trim();
+  if(n.length!==3&&n.length!==4){
+    error.textContent="Введіть номер транспорту з 3 або 4 цифр";
+    error.style.display="block";
+    return;
+  }
+  localStorage.setItem("transportNumber",n);
+  localStorage.setItem("transportType",n.length===4?"bus":"trolleybus");
+  window.location.href="scanner.html";
+}
+</script>
+</body>
+</html>
