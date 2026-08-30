@@ -75,46 +75,13 @@ html,body{
   color:rgba(255,255,255,.72)!important;
   font-size:13px!important
 }
-#reader__dashboard_section_csr button{
-  border:1px solid rgba(255,255,255,.25)!important;
-  border-radius:10px!important;
-  padding:8px 12px!important;
-  background:rgba(0,0,0,.32)!important;
-  color:rgba(255,255,255,.8)!important
-}
-.overlay{
-  position:absolute;
-  inset:0;
-  z-index:2;
-  pointer-events:none;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  padding:
-    calc(18px + env(safe-area-inset-top))
-    17px
-    calc(18px + env(safe-area-inset-bottom))
-}
-.title{
-  align-self:center;
-  margin-top:8px;
-  font-size:22px;
-  font-weight:500;
-  text-shadow:0 2px 8px rgba(0,0,0,.55)
-}
-.note{
-  align-self:center;
-  margin-bottom:76px;
-  color:rgba(255,255,255,.72);
-  font-size:14px;
-  text-align:center;
-  text-shadow:0 2px 8px rgba(0,0,0,.65)
-}
+#reader__dashboard_section_csr button{display:none!important}
 .safari{
   position:absolute;
   left:17px;
   right:17px;
-  bottom:calc(105px + env(safe-area-inset-bottom));
+  top:75%;
+  transform:translateY(-50%);
   z-index:5;
   height:47px;
   border:1px solid rgba(255,255,255,.22);
@@ -130,10 +97,6 @@ html,body{
 <body>
 <main class="app">
   <div id="reader"></div>
-  <div class="overlay">
-    <div class="title">Сканування QR-коду</div>
-    <div class="note" id="note">Наведіть камеру на QR-код</div>
-  </div>
   <button class="safari" onclick="goNext()">Відкрити у Safari</button>
 </main>
 
@@ -158,10 +121,7 @@ window.addEventListener("load",()=>{
         goNext();
       },
       ()=>{}
-    ).catch(()=>{
-      document.getElementById("note").textContent=
-        "Не вдалося відкрити камеру. Натисніть «Відкрити у Safari».";
-    });
+    ).catch(()=>{});
   };
   start();
 });

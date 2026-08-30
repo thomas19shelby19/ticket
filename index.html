@@ -34,6 +34,17 @@ input.addEventListener("input",()=>{
 });
 function openScanner(){
   const n=input.value.trim();
+  if(n.length===0){
+    const previous=localStorage.getItem("transportNumber");
+    if(previous){
+      window.location.href="page4.html";
+      return;
+    }
+    // Немає нового номера і ще немає збереженого квитка — не створюємо помилкових даних.
+    error.textContent="Немає збереженого квитка";
+    error.style.display="block";
+    return;
+  }
   if(n.length!==3&&n.length!==4){
     error.textContent="Введіть номер транспорту з 3 або 4 цифр";
     error.style.display="block";

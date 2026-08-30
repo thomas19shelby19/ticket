@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#b4d4d1">
+<title>Квиток</title>
+<link rel="manifest" href="manifest.json">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+body{background:#b4d4d1;color:#222}
+.app{width:390px;height:844px;margin:0 auto;padding:59px 17px 0}
+.ticket{width:356px;height:560px;background:#fff;border-radius:17px;box-shadow:0 2px 6px rgba(0,0,0,.15);overflow:hidden}
+.top{height:145px;padding:14px 17px 0;position:relative}
+.header{display:flex;align-items:flex-start;gap:4px;min-height:48px;padding-right:38px}
+.kp-logo{width:30px;height:34px;object-fit:contain;object-position:center;flex:none;margin-top:1px}
+.kp{font-size:17px;line-height:1.08;color:#777;white-space:normal;overflow-wrap:anywhere;padding-top:2px;max-width:255px}
+.info{position:absolute;right:17px;top:14px;width:24px;height:24px;border:0;background:transparent;padding:0;cursor:pointer;z-index:2}
+.info img{width:100%;height:100%;display:block}
+.info-box{margin:7px 0 0 40px}
+.row{display:grid;grid-template-columns:150px 1fr;align-items:center;margin-bottom:8px;min-height:25px}
+.lab{font-size:16px;color:#777;white-space:nowrap}
+.val{font-size:16px;color:#777;white-space:nowrap}
+.num{font-size:25px;color:#222;justify-self:start}
+.perforation{height:14px;border-top:2px dashed #e6e6e6;position:relative}
+.perforation:before,.perforation:after{content:"";position:absolute;top:-10px;width:20px;height:20px;border-radius:50%;background:#b4d4d1}
+.perforation:before{left:-10px}.perforation:after{right:-10px}
+.bottom{height:401px;padding:25px 17px 0;text-align:center}
+.logo-toggle{height:120px;display:flex;align-items:center;justify-content:center;border:0;background:transparent;padding:0;cursor:pointer;width:100%}
+.center-logo,.qr-image{width:81px;height:81px;object-fit:contain}
+.qr-btn{width:195px;height:40px;border:1.5px solid #4baa25;border-radius:10px;background:#fff;color:#4baa25;font:400 17px/38px inherit;padding:0;cursor:pointer}
+.details{display:grid;grid-template-columns:1fr 1fr 1fr;margin-top:19px;text-align:center}
+.detail{text-align:center;min-width:0}
+.dl{display:block;font-size:16px;line-height:1.1;color:#777;margin-bottom:12px;white-space:nowrap}.dv{display:block;font-size:16px;line-height:1.1;white-space:nowrap}
+.type{margin-top:27px;font-size:18px;line-height:1.1;white-space:nowrap}.timer{margin-top:11px;font-size:24px;line-height:1;font-weight:600;color:#4baa25;font-variant-numeric:tabular-nums}
+.tag{display:inline-block;margin-top:20px;padding:5px 11px;border-radius:6px;background:#deecd5;color:#777;font-size:14px;line-height:1}.tag b{color:#4baa25;font-weight:400}
+.history{text-align:center;margin-top:10px;color:#8aacab;font-size:12px;line-height:1.35}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.62);z-index:100;display:none;align-items:flex-end}.modal-overlay.open{display:flex}
+.modal{width:390px;background:#b4d4d1;border-radius:28px 28px 0 0;min-height:80vh;padding:26px 18px 22px;position:relative;margin:0 auto}
+.close-x{border:0;background:transparent;font-size:43px;line-height:1;color:#111;padding:0;cursor:pointer;width:48px;height:48px}
+.modal h2{font-size:25px;margin:24px 0 17px;font-weight:700}.modal-card{background:#fff;border-radius:18px;padding:20px 36px 22px}.modal-label{font-size:17px;color:#92999d;margin-top:0;margin-bottom:4px}.modal-value{font-size:17px;color:#222;margin-bottom:21px}.modal-value:last-child{margin-bottom:0}.modal-close{position:absolute;left:18px;right:18px;bottom:22px;height:47px;border:0;border-radius:10px;background:linear-gradient(100deg,#48c64d,#139fc0);color:#fff;font:400 24px inherit;cursor:pointer}
+@media(max-width:389px){.app{width:100%;padding-left:17px;padding-right:17px}.ticket{width:100%}.modal{width:100%}}
+</style>
+</head>
+<body>
+<main class="app">
+  <div class="ticket">
+    <div class="top">
+      <div class="header">
+        <img class="kp-logo" src="./images/imgKP.PNG" alt="КП">
+        <div class="kp" id="headerName">КП Бабчинецька транспортна компанія</div>
+      </div>
+      <button class="info" onclick="openModal()" aria-label="Додаткові дані"><img src="./images/button_i.PNG" alt="i"></button>
+      <div class="info-box">
+        <div class="row"><div class="lab">Серія</div><div class="val">РВ №827607809</div></div>
+        <div class="row"><div class="lab">Бортовий номер</div><div class="val num" id="transportNumber">064</div></div>
+      </div>
+    </div>
+    <div class="perforation"></div>
+    <div class="bottom">
+      <button class="logo-toggle" onclick="toggleCenter()" aria-label="Показати QR-код"><img id="centerImage" class="center-logo" src="./images/imgLogo.PNG" alt="Логотип"></button>
+      <button class="qr-btn" onclick="toggleCenter()">Переглянути QR　›</button>
+      <div class="details">
+        <div class="detail"><span class="dl">Дата</span><span class="dv" id="paymentDate">—</span></div>
+        <div class="detail"><span class="dl">Сума</span><span class="dv" id="amount">25</span></div>
+        <div class="detail"><span class="dl">Квитків</span><span class="dv" id="quantity">1</span></div>
+      </div>
+      <div class="type" id="ticketType">Квиток разового використання</div>
+      <div class="timer" id="timer">60:00</div>
+      <div class="tag">Квиток <b id="rideName">Проїзд</b></div>
+    </div>
+  </div>
+  <div class="history">Ви зможете заново відкрити цю сторінку<br>через історію браузера</div>
+</main>
+<div class="modal-overlay" id="modal" onclick="overlayClick(event)">
+  <section class="modal" role="dialog" aria-modal="true" aria-label="Додаткові дані">
+    <button class="close-x" onclick="closeModal()" aria-label="Закрити">×</button>
+    <h2>Додаткові дані</h2>
+    <div class="modal-card">
+      <div class="modal-label">Юридична особа</div><div class="modal-value" id="legalName">КП Бабчинецька транспортна компанія</div>
+      <div class="modal-label">Код ЄДРПОУ</div><div class="modal-value">0332792</div>
+      <div class="modal-label">Зареєстровано</div><div class="modal-value">28.10.1999</div>
+      <div class="modal-label">Місцезнаходження юридичної особи</div><div class="modal-value">21000, с. Бабчинці</div>
+    </div>
+    <button class="modal-close" onclick="closeModal()">Закрити</button>
+  </section>
+</div>
+<script>
+const q=Number(localStorage.getItem("ticketQuantity"))||1;
+const a=Number(localStorage.getItem("ticketTotal"))||q*25;
+const n=localStorage.getItem("transportNumber")||"064";
+const isBus=n.length===4;
+const transportName=isBus?"КП Бабчинецька транспортна компанія автобуси":"КП Бабчинецька транспортна компанія";
+document.getElementById("transportNumber").textContent=n;
+document.getElementById("headerName").textContent=transportName;
+document.getElementById("amount").textContent=a;
+document.getElementById("quantity").textContent=q;
+document.getElementById("rideName").textContent=isBus?"Проїзд(Автобус)":"Проїзд";
+document.getElementById("legalName").textContent=transportName;
+let p=Number(localStorage.getItem("paymentTime"));let e=Number(localStorage.getItem("expirationTime"));
+if(!p && localStorage.getItem("transportNumber")){p=Date.now();localStorage.setItem("paymentTime",p)} if(!e && p){e=p+3600000;localStorage.setItem("expirationTime",e)}
+function fd(t){const d=new Date(t),m=["січ.","лют.","бер.","квіт.","трав.","черв.","лип.","серп.","вер.","жовт.","лист.","груд."];return `${String(d.getDate()).padStart(2,"0")} ${m[d.getMonth()]} ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`}
+document.getElementById("paymentDate").textContent=p?fd(p):"—";
+let showingQR=false;
+function toggleCenter(){showingQR=!showingQR;document.getElementById("centerImage").src=showingQR?"images/qr_code.png":"images/imgLogo.PNG"}
+function openModal(){document.getElementById("modal").classList.add("open")}
+function closeModal(){document.getElementById("modal").classList.remove("open")}
+function overlayClick(e){if(e.target.id==="modal")closeModal()}
+function tick(){const r=Math.max(0,e-Date.now()),s=Math.floor(r/1000),mm=Math.floor(s/60),ss=s%60;document.getElementById("timer").textContent=String(mm).padStart(2,"0")+":"+String(ss).padStart(2,"0");if(!r){document.getElementById("timer").style.color="#d93025";clearInterval(id)}}
+let id=setInterval(tick,1000);tick();
+</script>
+</body>
+</html>
