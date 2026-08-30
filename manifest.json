@@ -3,7 +3,7 @@
   "short_name": "Квиток",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#b4d4d1",
-  "theme_color": "#b4d4d1",
+  "background_color": "#abd6d2",
+  "theme_color": "#abd6d2",
   "orientation": "portrait"
 }
