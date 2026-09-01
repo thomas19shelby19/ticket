@@ -34,24 +34,39 @@ input.addEventListener("input",()=>{
 });
 function openScanner(){
   const n=input.value.trim();
+
+  // Порожнє поле = повернення до останнього оплаченого квитка.
+  // Повертаємо тільки активний квиток, строк дії якого ще не минув.
   if(n.length===0){
     const previous=localStorage.getItem("transportNumber");
-    if(previous){
+    const paymentTime=Number(localStorage.getItem("paymentTime"));
+    const expirationTime=Number(localStorage.getItem("expirationTime"));
+
+    if(previous && paymentTime && expirationTime && Date.now()<expirationTime){
       window.location.href="page4.html";
       return;
     }
-    // Немає нового номера і ще немає збереженого квитка — не створюємо помилкових даних.
-    error.textContent="Немає збереженого квитка";
+
+    error.textContent=previous && expirationTime && Date.now()>=expirationTime
+      ? "Збережений квиток більше не дійсний"
+      : "Немає збереженого квитка";
     error.style.display="block";
     return;
   }
+
   if(n.length!==3&&n.length!==4){
     error.textContent="Введіть номер транспорту з 3 або 4 цифр";
     error.style.display="block";
     return;
   }
+
+  // Початок нового замовлення: старий квиток не повинен переноситися в нову покупку.
   localStorage.setItem("transportNumber",n);
   localStorage.setItem("transportType",n.length===4?"bus":"trolleybus");
+  localStorage.removeItem("paymentTime");
+  localStorage.removeItem("expirationTime");
+  localStorage.removeItem("ticketQuantity");
+  localStorage.removeItem("ticketTotal");
   window.location.href="scanner.html";
 }
 </script>
