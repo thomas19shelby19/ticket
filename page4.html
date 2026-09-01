@@ -43,6 +43,7 @@ app-ticket{width:100%;display:flex;position:relative;flex-direction:column;box-s
 .header-company-wrapper .row .col:first-of-type{width:3.3333333333rem;min-width:3.3333333333rem;margin-right:8px}
 .header-company-wrapper .row .col:last-of-type{width:100%;align-items:center}
 .header-info-icon,.header .icon{height:3.3333333333rem;width:3.3333333333rem}
+.header-info-icon{height:2rem;width:2rem}
 .header-info-icon{background:#fff url('./images/button_i.PNG') no-repeat center/contain;border:none;cursor:pointer;padding:0}
 .header .icon{border-radius:.6666666667rem;object-fit:contain}
 .header .company{display:inline-block;min-width:161px;text-align:left;text-wrap:pretty;font-weight:400;font-size:1.1666666667rem;line-height:1.3333333333rem;color:rgba(0,0,0,.54)}
@@ -87,65 +88,51 @@ app-ticket{width:100%;display:flex;position:relative;flex-direction:column;box-s
   <p class="tip-text">Ви зможете заново відкрити цю сторінку через історію браузера</p>
 </app-tickets>
 <script>
-/* Логіка проєкту «Квиток». Дизайн, CSS, розміри та розташування сторінки 4 не змінюються. */
-const PRICE = 25;
-const n = localStorage.getItem('transportNumber') || '001';
-const q = Math.max(1, Number(localStorage.getItem('ticketQuantity')) || 1);
-const a = Number(localStorage.getItem('ticketTotal')) || q * PRICE;
-const bus = n.length === 4;
-const transportName = bus
-  ? 'КП Бабчинецька транспортна компанія автобуси'
-  : 'КП Бабчинецька транспортна компанія';
+const n=localStorage.getItem('transportNumber')||'001';
+const q=Math.max(1,Number(localStorage.getItem('ticketQuantity'))||1);
+const a=Number(localStorage.getItem('ticketTotal'))||q*25;
+const bus=n.length===4;
+const paymentTime=Number(localStorage.getItem('paymentTime'))||0;
+const expirationTime=Number(localStorage.getItem('expirationTime'))||0;
 
-// Дані останньої оплати — сторінка 4 тільки відображає їх і не створює новий квиток.
-const paymentTime = Number(localStorage.getItem('paymentTime')) || 0;
-const expirationTime = Number(localStorage.getItem('expirationTime')) || 0;
+document.getElementById('transportNumber').textContent=n;
+document.getElementById('companyName').textContent=bus?'КП Бабчинецька транспортна компанія автобуси':'КП Бабчинецька транспортна компанія';
+document.getElementById('amount').textContent=a;
+document.getElementById('quantity').textContent=q;
+document.getElementById('rideName').textContent=bus?'Проїзд(Автобус)':'Проїзд';
 
-document.getElementById('transportNumber').textContent = n;
-document.getElementById('companyName').textContent = transportName;
-document.getElementById('amount').textContent = a;
-document.getElementById('quantity').textContent = q;
-document.getElementById('rideName').textContent = bus ? 'Проїзд(Автобус)' : 'Проїзд';
-
-function formatPaymentDate(timestamp) {
-  const d = new Date(timestamp);
-  const months = ['січ.','лют.','бер.','квіт.','трав.','черв.','лип.','серп.','вер.','жовт.','лист.','груд.'];
-  return `${String(d.getDate()).padStart(2,'0')} ${months[d.getMonth()]} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+if(paymentTime>0){
+  const d=new Date(paymentTime);
+  const months=['січ.','лют.','бер.','квіт.','трав.','черв.','лип.','серп.','вер.','жовт.','лист.','груд.'];
+  document.getElementById('paymentDate').textContent=String(d.getDate()).padStart(2,'0')+' '+months[d.getMonth()]+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
 }
 
-if (paymentTime) {
-  document.getElementById('paymentDate').textContent = formatPaymentDate(paymentTime);
-}
-
-function updateTimer() {
-  const timer = document.getElementById('timer');
-  const remaining = expirationTime ? Math.max(0, expirationTime - Date.now()) : 0;
-  const totalSeconds = Math.floor(remaining / 1000);
-  const minutes = Math.floor(totalSeconds / 60);
-  const seconds = totalSeconds % 60;
-  timer.textContent = `${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
-  if (remaining <= 0) {
-    timer.style.color = '#d93025';
-    clearInterval(timerId);
+// Відлік завжди прив'язаний до реального часу оплати. Перезавантаження сторінки
+// або повторний вхід не запускає нову годину.
+const timer=document.getElementById('timer');
+function renderTimer(){
+  if(!expirationTime){
+    timer.textContent='00:00';
+    return;
   }
+  const left=Math.max(0,expirationTime-Date.now());
+  const totalSeconds=Math.floor(left/1000);
+  const minutes=Math.floor(totalSeconds/60);
+  const seconds=totalSeconds%60;
+  timer.textContent=String(minutes).padStart(2,'0')+':'+String(seconds).padStart(2,'0');
 }
+renderTimer();
+const timerInterval=setInterval(()=>{
+  renderTimer();
+  if(expirationTime && Date.now()>=expirationTime) clearInterval(timerInterval);
+},1000);
 
-let timerId = setInterval(updateTimer, 1000);
-updateTimer();
+// Кнопка «i»: працює без зміни основного дизайну сторінки.
+document.querySelector('.header-info-icon').addEventListener('click',()=>{
+  const company=document.getElementById('companyName').textContent;
+  alert('Додаткова інформація\n\nЮридична особа: '+company);
+});
 
-// Кнопка «Переглянути QR»: використовує вже наявний локальний QR-файл,
-// не змінюючи жодних стилів сторінки.
-const qrButton = document.getElementById('qrButton');
-const qrPlaceholder = document.querySelector('.ticket-main-qr-placeholder');
-if (qrButton && qrPlaceholder) {
-  let qrOpened = false;
-  qrButton.addEventListener('click', () => {
-    qrOpened = !qrOpened;
-    qrPlaceholder.style.backgroundImage = qrOpened
-      ? "url('./images/qr_code.png')"
-      : "url('./images/imgLogo.PNG')";
-  });
-}
 </script>
 </body>
 </html>

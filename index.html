@@ -35,19 +35,18 @@ input.addEventListener("input",()=>{
 function openScanner(){
   const n=input.value.trim();
 
-  // Порожнє поле = повернення до останнього оплаченого квитка.
-  // Повертаємо тільки активний квиток, строк дії якого ще не минув.
+  // Порожнє поле: відкрити останній оплачений квиток, якщо він ще дійсний.
   if(n.length===0){
     const previous=localStorage.getItem("transportNumber");
     const paymentTime=Number(localStorage.getItem("paymentTime"));
     const expirationTime=Number(localStorage.getItem("expirationTime"));
 
-    if(previous && paymentTime && expirationTime && Date.now()<expirationTime){
+    if(previous && paymentTime>0 && expirationTime>paymentTime && Date.now()<expirationTime){
       window.location.href="page4.html";
       return;
     }
 
-    error.textContent=previous && expirationTime && Date.now()>=expirationTime
+    error.textContent=(previous && expirationTime>0 && Date.now()>=expirationTime)
       ? "Збережений квиток більше не дійсний"
       : "Немає збереженого квитка";
     error.style.display="block";
@@ -60,7 +59,7 @@ function openScanner(){
     return;
   }
 
-  // Початок нового замовлення: старий квиток не повинен переноситися в нову покупку.
+  // Новий номер = нове замовлення. Старі дані квитка не використовуємо.
   localStorage.setItem("transportNumber",n);
   localStorage.setItem("transportType",n.length===4?"bus":"trolleybus");
   localStorage.removeItem("paymentTime");
