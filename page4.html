@@ -1,138 +1,72 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Квиток</title>
+<!doctype html>
+<html lang="uk"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#b4d5d2"><title>Квиток</title>
 <style>
-@font-face{font-family:PryvatSans;src:url('./fonts/PryvatSans-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
-@font-face{font-family:PryvatSans;src:url('./fonts/PryvatSans-Medium.woff2') format('woff2');font-weight:500;font-display:swap}
-*{font-feature-settings:"ss01" on;font-variant-numeric:lining-nums tabular-nums;font-family:PryvatSans,Arial,Helvetica,sans-serif;box-sizing:border-box}
-html,body{height:100dvh;font-size:12px;scroll-behavior:smooth;background:rgba(172,214,211,1)}
-body{margin:0;padding-top:1rem;padding-inline:1.3333333333rem;line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-.app-tickets{display:flex;gap:.6666666667rem;align-items:center;flex-direction:column}
-.tip-text{text-align:center;max-width:19.6666666667rem;color:rgba(138,144,148,1);margin:0}
-app-ticket{width:100%;display:flex;position:relative;flex-direction:column;box-shadow:0 0 2px 0 rgba(0,0,0,.1),0 2px 4px 0 rgba(0,0,0,.1),0 0 2px 0 rgba(0,0,0,.1);border-radius:.6666666667rem;background:#fff}
-.header-content-wrapper{display:flex;flex-direction:column;width:100%;gap:.6666666667rem}
-.ticket-divider{display:flex;height:2.0833333333rem;position:relative;align-items:center;justify-content:center}
-.ticket-divider:before,.ticket-divider:after{top:50%;content:"";position:absolute;width:1.6666666667rem;height:1.6666666667rem;border-radius:50%;transform:translateY(-50%);background:rgba(172,214,211,1)}
-.ticket-divider:before{left:-.8333333333rem}.ticket-divider:after{right:-.8333333333rem}
-.ticket-series,.ticket-vehicle{color:#757575;font-weight:400;font-size:1.1666666667rem;line-height:1.5rem;display:flex;align-items:center;justify-content:space-between;margin:0}
-.ticket-series span,.ticket-vehicle span{font-weight:500}
-.ticket-vehicle span{color:#212121;font-size:1.6666666667rem;line-height:1.3333333333rem;letter-spacing:-.0333333333rem}
-.ticket-main{height:100%;display:flex;align-items:center;flex-direction:column;gap:1.3333333333rem;padding:0 1.3333333333rem 1.3333333333rem}
-.ticket-main-info{width:100%;display:flex;align-items:center;justify-content:space-between}
-.ticket-main-info-col{display:flex;gap:.3333333333rem;align-items:center;flex-direction:column;font-weight:400;font-size:1.1666666667rem;line-height:1.8333333333rem;letter-spacing:-.4px;margin:0}
-.ticket-main-info-col__date-col{align-items:start}
-.ticket-main-info-col-title{color:rgba(0,0,0,.54)}
-.ticket-main-info-col-description{font-weight:500;line-height:2rem;color:#212121}
-.placeholder-container{opacity:1;transform:translateY(0);display:flex;flex-direction:column;align-items:center;gap:1.3333333333rem}
-.ticket-main-qr-placeholder{width:6.5rem;height:7.3333333333rem;aspect-ratio:1;background:url('./images/imgLogo.PNG') no-repeat center/contain}
-.button-outline{background:transparent;border:1px solid #4EA524;color:#4EA524;border-radius:.3333333333rem;padding:.5rem 1rem;cursor:pointer;display:flex;align-items:center;gap:.3333333333rem}
-.button-outline svg{width:25px;height:24px;flex:none}
-.ticket-main-expiration{display:flex;gap:.3333333333rem;text-wrap:pretty;text-align:center;flex-direction:column}
-.ticket-main-expiration-type{font-size:1.3333333333rem;line-height:2rem;margin:0}
-.ticket-main-expiration-time{font-weight:500;font-size:1.6666666667rem;line-height:2.3333333333rem;color:#4EA524;margin:0}
-.ticket-service-type{border-radius:.3333333333rem;padding-inline:.6666666667rem;display:flex;gap:.3333333333rem;align-items:center;font:1.1666666667rem/1.8333333333rem PryvatSans,Arial,Helvetica,sans-serif;letter-spacing:-.4px;color:rgba(0,0,0,.54);margin:0}
-.ticket-service-type__type{font-weight:500;line-height:2rem;word-break:break-word;text-wrap:pretty;color:#4EA524}
-.ticket-green{background:rgba(78,165,36,.2)}
-.header{display:flex;align-items:center;padding:1.3333333333rem;position:relative;border-radius:.6666666667rem;background:#fff;width:100%}
-.header-company-wrapper{display:flex;gap:1.3333333333rem;flex-direction:column;width:100%}
-.header-company-wrapper .row{display:flex}
-.header-company-wrapper .row .col{display:flex;justify-content:space-between}
-.header-company-wrapper .row .col:first-of-type{width:3.3333333333rem;min-width:3.3333333333rem;margin-right:8px}
-.header-company-wrapper .row .col:last-of-type{width:100%;align-items:center}
-.header-info-icon,.header .icon{height:3.3333333333rem;width:3.3333333333rem}
-.header-info-icon{height:2rem;width:2rem}
-.header-info-icon{background:#fff url('./images/button_i.PNG') no-repeat center/contain;border:none;cursor:pointer;padding:0}
-.header .icon{border-radius:.6666666667rem;object-fit:contain}
-.header .company{display:inline-block;min-width:161px;text-align:left;text-wrap:pretty;font-weight:400;font-size:1.1666666667rem;line-height:1.3333333333rem;color:rgba(0,0,0,.54)}
-.header-info-icon{font-size:0}
-</style>
-</head>
-<body>
-<app-tickets class="app-tickets">
-  <app-ticket id="ticket">
-    <app-header>
-      <header class="header">
-        <div class="header-company-wrapper">
-          <div class="row">
-            <div class="col"><img class="icon" src="./images/imgKP.PNG" alt="Company Logo"></div>
-            <div class="col"><span class="company" id="companyName">КП Бабчинецька транспортна компанія</span><button class="header-info-icon" aria-label="Додаткова інформація"></button></div>
-          </div>
-          <div class="row">
-            <div class="col"></div>
-            <div class="col"><div class="header-content-wrapper">
-              <p class="ticket-series">Серія <span>PB №827607809</span></p>
-              <p class="ticket-vehicle">Бортовий номер <span id="transportNumber">001</span></p>
-            </div></div>
-          </div>
-        </div>
-      </header>
-    </app-header>
-    <section class="ticket-divider"><svg xmlns="http://www.w3.org/2000/svg" width="85%" height="2" viewBox="0 0 249 2" fill="none" preserveAspectRatio="none"><path opacity="0.21" d="M1 1H248" stroke="#8A9094" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8"></path></svg></section>
-    <main class="ticket-main">
-      <div class="placeholder-container">
-        <div class="ticket-main-qr-placeholder"></div>
-        <button class="button-outline" id="qrButton">Переглянути QR <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.76531 6.30461C10.1558 5.91409 10.789 5.91409 11.1795 6.30462L16.168 11.2931C16.5585 11.6837 16.5585 12.3168 16.168 12.7074L11.1795 17.6958C10.789 18.0863 10.1558 18.0863 9.76531 17.6958C9.37478 17.3053 9.37478 16.6721 9.76531 16.2816L14.0467 12.0002L9.7653 7.71882C9.37478 7.32829 9.37478 6.69513 9.76531 6.30461Z" fill="currentColor"></path></svg></button>
-      </div>
-      <div class="ticket-main-info">
-        <p class="ticket-main-info-col ticket-main-info-col__date-col"><span class="ticket-main-info-col-title">Дата</span><span class="ticket-main-info-col-description" id="paymentDate">28 серп. 20:36</span></p>
-        <p class="ticket-main-info-col"><span class="ticket-main-info-col-title">Сума</span><span class="ticket-main-info-col-description" id="amount">25</span></p>
-        <p class="ticket-main-info-col"><span class="ticket-main-info-col-title">Квитків</span><span class="ticket-main-info-col-description" id="quantity">2</span></p>
-      </div>
-      <div class="ticket-main-expiration"><p class="ticket-main-expiration-type">Квиток разового використання</p><p class="ticket-main-expiration-time" id="timer">59:59</p></div>
-      <p class="ticket-service-type ticket-green"><span class="ticket-service-type__service">Квиток</span><span class="ticket-service-type__type" id="rideName">Проїзд</span></p>
-    </main>
-  </app-ticket>
-  <p class="tip-text">Ви зможете заново відкрити цю сторінку через історію браузера</p>
-</app-tickets>
+@font-face{font-family:Comfortaa;src:url('./images/Comfortaa-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:Comfortaa;src:url('./images/Comfortaa-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%;font-family:Comfortaa,Arial,sans-serif}
+body{background:#b4d5d2;color:#212121}
+.page{position:relative;width:390px;height:777px;margin:0 auto;overflow:hidden;padding-top:59px}
+.ticket-wrap{position:relative;width:358px;height:514px;margin-left:16px}
+.ticket-bg{position:absolute;inset:0;width:358px;height:514px;display:block}
+.hit-info,.hit-qr{position:absolute;border:0;background:transparent;padding:0;cursor:pointer;z-index:5}
+.hit-info{left:307px;top:17px;width:34px;height:34px}
+.hit-qr{left:67px;top:278px;width:224px;height:44px}
+.dynamic{position:absolute;z-index:4;font-family:Comfortaa,Arial,sans-serif;background:#fff;color:#212121;white-space:nowrap}
+.number{right:16px;top:96px;font-size:24px;line-height:29px;font-weight:400;min-width:38px;text-align:right;padding:0 0 1px}
+.date{left:15px;top:364px;font-size:16px;line-height:19px;padding:0 2px}
+.qty{right:15px;top:364px;font-size:16px;line-height:19px;min-width:12px;text-align:right;padding:0 1px}
+.timer{left:151px;top:431px;font-size:24px;line-height:30px;font-weight:700;color:#64a33b;padding:0 2px}
+.company-bus{left:63px;top:19px;width:244px;height:47px;white-space:normal;font-size:15px;line-height:17px;color:#757575;padding:0}
+.ride-bus{left:181px;top:475px;min-width:48px;font-size:16px;line-height:17px;color:#64a33b;padding:0 1px}
+.history{position:absolute;left:16px;top:582px;width:358px;text-align:center;color:#8a9094;font-size:12px;line-height:17px;font-weight:400}
+.modal-layer{position:fixed;inset:0;z-index:100;display:none;background:rgba(0,0,0,.62)}
+.modal-layer.open{display:block}
+.modal-sheet{position:absolute;left:0;top:59px;width:390px;height:681.333px;background:#b4d5d2 url('./images/modal_sheet.png') center top/390px auto no-repeat;border-radius:28px 28px 0 0;overflow:hidden}
+.modal-close{position:absolute;left:14px;top:17px;width:34px;height:34px;border:0;background:transparent;padding:0;cursor:pointer;z-index:4}
+.modal-bus{position:absolute;left:24px;top:155px;width:342px;height:23px;background:#fff;font:400 16px/18px Comfortaa,Arial,sans-serif;color:#212121;display:none;z-index:3}
+.modal-layer.bus .modal-bus{display:block}
+@media(max-width:389px){.page{width:100%}.ticket-wrap{margin-left:calc((100% - 358px)/2)}.history{left:calc((100% - 358px)/2)}.modal-sheet{width:100%;background-size:100% auto}}
+</style><link rel="manifest" href="manifest.json"></head>
+<body><main class="page"><section class="ticket-wrap" id="ticketWrap">
+<img id="ticketBg" class="ticket-bg" src="images/ticket_closed.png" alt="Квиток">
+<button class="hit-info" onclick="openModal()" aria-label="Додаткові дані"></button>
+<button class="hit-qr" id="qrHit" onclick="openQR()" aria-label="Переглянути QR"></button>
+<div class="dynamic number" id="numberOverlay"></div><div class="dynamic date" id="dateOverlay"></div><div class="dynamic qty" id="qtyOverlay"></div><div class="dynamic timer" id="timerOverlay"></div><div class="dynamic company-bus" id="companyBusOverlay"></div><div class="dynamic ride-bus" id="rideBusOverlay"></div>
+</section><div class="history">Ви зможете заново відкрити цю сторінку<br>через історію браузера</div></main>
+<div class="modal-layer" id="modalLayer" onclick="backdropClose(event)"><div class="modal-sheet"><button class="modal-close" onclick="closeModal()" aria-label="Закрити"></button><div class="modal-bus">КП ВІННИЦЬКА ТРАНСПОРТНА КОМПАНІЯ АВТОБУСИ</div></div></div>
 <script>
-const n=localStorage.getItem('transportNumber')||'001';
+const n=localStorage.getItem('transportNumber')||'006';
 const q=Math.max(1,Number(localStorage.getItem('ticketQuantity'))||1);
-const a=Number(localStorage.getItem('ticketTotal'))||q*25;
 const bus=n.length===4;
-const paymentTime=Number(localStorage.getItem('paymentTime'))||0;
-const expirationTime=Number(localStorage.getItem('expirationTime'))||0;
-
-document.getElementById('transportNumber').textContent=n;
-document.getElementById('companyName').textContent=bus?'КП Бабчинецька транспортна компанія автобуси':'КП Бабчинецька транспортна компанія';
-document.getElementById('amount').textContent=a;
-document.getElementById('quantity').textContent=q;
-document.getElementById('rideName').textContent=bus?'Проїзд(Автобус)':'Проїзд';
-
-if(paymentTime>0){
-  const d=new Date(paymentTime);
-  const months=['січ.','лют.','бер.','квіт.','трав.','черв.','лип.','серп.','вер.','жовт.','лист.','груд.'];
-  document.getElementById('paymentDate').textContent=String(d.getDate()).padStart(2,'0')+' '+months[d.getMonth()]+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
-}
-
-// Відлік завжди прив'язаний до реального часу оплати. Перезавантаження сторінки
-// або повторний вхід не запускає нову годину.
-const timer=document.getElementById('timer');
-function renderTimer(){
-  if(!expirationTime){
-    timer.textContent='00:00';
-    return;
-  }
-  const left=Math.max(0,expirationTime-Date.now());
-  const totalSeconds=Math.floor(left/1000);
-  const minutes=Math.floor(totalSeconds/60);
-  const seconds=totalSeconds%60;
-  timer.textContent=String(minutes).padStart(2,'0')+':'+String(seconds).padStart(2,'0');
-}
-renderTimer();
-const timerInterval=setInterval(()=>{
-  renderTimer();
-  if(expirationTime && Date.now()>=expirationTime) clearInterval(timerInterval);
-},1000);
-
-// Кнопка «i»: працює без зміни основного дизайну сторінки.
-document.querySelector('.header-info-icon').addEventListener('click',()=>{
-  const company=document.getElementById('companyName').textContent;
-  alert('Додаткова інформація\n\nЮридична особа: '+company);
-});
-
-</script>
-</body>
-</html>
+// Page 4 amount is fixed at 25 UAH by the agreed specification, regardless of ticket count.
+const amount=25;
+document.getElementById('numberOverlay').textContent=n;
+document.getElementById('qtyOverlay').textContent=q;
+document.getElementById('companyBusOverlay').textContent=bus?'КП Вінницька транспортна компанія автобуси':'';
+document.getElementById('rideBusOverlay').textContent=bus?'Проїзд(Автобус)':'';
+// The reference card already contains 006/1/default data. Hide overlays when the reference value is identical.
+function hideIfDefault(id, value, def){document.getElementById(id).style.display=(String(value)===String(def))?'none':'block'}
+hideIfDefault('numberOverlay',n,'006');
+hideIfDefault('qtyOverlay',q,'1');
+document.getElementById('companyBusOverlay').style.display=bus?'block':'none';
+document.getElementById('rideBusOverlay').style.display=bus?'block':'none';
+// Payment timestamp: use the exact moment payment was confirmed, persisted for history reloads.
+let paymentTime=Number(localStorage.getItem('paymentTime'));
+let expirationTime=Number(localStorage.getItem('expirationTime'));
+if(!paymentTime){paymentTime=Date.now();localStorage.setItem('paymentTime',String(paymentTime))}
+if(!expirationTime){expirationTime=paymentTime+3600000;localStorage.setItem('expirationTime',String(expirationTime))}
+const months=['січ.','лют.','бер.','квіт.','трав.','черв.','лип.','серп.','вер.','жовт.','лист.','груд.'];
+function formatDate(ts){const d=new Date(ts);return String(d.getDate()).padStart(2,'0')+' '+months[d.getMonth()]+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}
+const dateText=formatDate(paymentTime);
+// Reference screenshot contains a fixed sample date; the real ticket uses payment time.
+const dateEl=document.getElementById('dateOverlay');dateEl.textContent=dateText;
+function tick(){const left=Math.max(0,expirationTime-Date.now());const s=Math.floor(left/1000);const mm=Math.floor(s/60);const ss=s%60;document.getElementById('timerOverlay').textContent=String(mm).padStart(2,'0')+':'+String(ss).padStart(2,'0');if(left<=0)clearInterval(timerId)}
+const timerId=setInterval(tick,250);tick();
+function openQR(){document.getElementById('ticketBg').src='images/ticket_open.png';document.getElementById('qrHit').style.display='none'}
+function openModal(){document.getElementById('modalLayer').classList.add('open');if(bus)document.getElementById('modalLayer').classList.add('bus')}
+function closeModal(){document.getElementById('modalLayer').classList.remove('open','bus')}
+function backdropClose(e){if(e.target.id==='modalLayer')closeModal()}
+</script></body></html>
