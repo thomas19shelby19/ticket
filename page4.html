@@ -15,47 +15,38 @@ body{background:#b4d5d2;color:#212121}
 .ticket-wrap{position:relative;width:358px;height:514px;margin-left:16px;overflow:hidden}
 .ticket-bg{position:absolute;left:0;top:0;width:358px;height:514px;display:block}
 
-/* Dynamic areas are deliberately fixed to the 390 CSS-pixel iPhone 12 reference. */
+/* All ticket geometry is fixed to the supplied 390×777 reference. */
 .mask{position:absolute;background:#fff;z-index:3;pointer-events:none}
-.mask-number{left:289px;top:94px;width:54px;height:34px}
-.mask-date{left:12px;top:335px;width:118px;height:25px}
-.mask-qty{left:286px;top:335px;width:56px;height:25px}
-.mask-timer{left:146px;top:429px;width:67px;height:31px}
-.mask-company{left:38px;top:14px;width:270px;height:55px;display:none}
-.mask-ride{left:98px;top:470px;width:162px;height:30px;display:none}
+.mask-number{left:288px;top:96px;width:54px;height:23px}
+.mask-date{left:12px;top:365px;width:118px;height:22px}
+.mask-qty{left:286px;top:365px;width:56px;height:22px}
+.mask-timer{left:146px;top:431px;width:67px;height:31px}
+.mask-company{left:38px;top:14px;width:270px;height:52px;display:none}
+.mask-ride{left:98px;top:438px;width:162px;height:40px;display:none}
 
-.dynamic{position:absolute;z-index:4;font-family:Comfortaa,Arial,sans-serif;background:transparent;color:#212121;white-space:nowrap;margin:0;padding:0}
+/* Dynamic values use the same system face visible in the reference ticket. */
+.dynamic{position:absolute;z-index:4;background:transparent;color:#212121;white-space:nowrap;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Segoe UI",Arial,sans-serif}
 .number{left:292px;top:97px;width:50px;font-size:21px;line-height:25px;font-weight:700;text-align:right}
-.date{left:16px;top:338px;font-size:16px;line-height:20px;font-weight:700}
-.qty{left:292px;top:338px;width:50px;font-size:16px;line-height:20px;font-weight:700;text-align:right}
+.date{left:16px;top:366px;font-size:16px;line-height:20px;font-weight:600}
+.qty{left:292px;top:366px;width:50px;font-size:16px;line-height:20px;font-weight:600;text-align:right}
 .timer{left:149px;top:432px;width:60px;font-size:22px;line-height:27px;font-weight:700;color:#64a33b;text-align:center}
-.company-bus{left:41px;top:20px;width:250px;height:42px;white-space:normal;font-size:13px;line-height:17px;font-weight:400;color:#757575;text-align:left;display:none}
+.company-bus{left:41px;top:38px;width:250px;height:34px;white-space:normal;font-family:Comfortaa,Arial,sans-serif;font-size:13px;line-height:17px;font-weight:400;color:#757575;text-align:left;display:none}
 
-/* Bus tickets need a wider pill than the trolleybus reference asset. */
-.bus-ride-pill{position:absolute;left:101px;top:473px;width:156px;height:24px;border-radius:6px;background:#dfecd5;z-index:5;display:none;align-items:center;justify-content:center;gap:4px;font-family:Comfortaa,Arial,sans-serif;font-size:11px;line-height:24px;font-weight:400;white-space:nowrap}
-.bus-ride-pill .label{color:#6c726d}
-.bus-ride-pill .value{color:#64a33b}
+.bus-ride-pill{position:absolute;left:101px;top:473px;width:156px;height:24px;border-radius:6px;background:#dfecd5;z-index:5;display:none;align-items:center;justify-content:center;gap:3px;font-family:Comfortaa,Arial,sans-serif;font-size:10.5px;line-height:24px;font-weight:400;white-space:nowrap}
+.bus-ride-pill .label{color:#6c726d}.bus-ride-pill .value{color:#64a33b}
 
-/* The whole QR/person area is one large tap target. */
-.hit-info,.hit-qr{position:absolute;border:0;background:transparent;padding:0;cursor:pointer;z-index:8;-webkit-appearance:none;appearance:none}
+/* The entire central illustration / QR area is one large touch target. */
+.hit-info,.hit-qr{position:absolute;border:0;background:transparent;padding:0;cursor:pointer;z-index:8;-webkit-appearance:none;appearance:none;touch-action:manipulation}
 .hit-info{left:307px;top:17px;width:34px;height:34px}
-.hit-qr{left:80px;top:105px;width:200px;height:190px}
+.hit-qr{left:72px;top:150px;width:214px;height:170px}
 
 .history{position:absolute;left:16px;top:582px;width:358px;text-align:center;color:#8a9094;font-size:12px;line-height:17px;font-weight:400}
 
-/* Payment confirmation toast shown only immediately after payment. */
-.success-toast{position:absolute;left:16px;top:0;width:358px;height:55px;border-radius:10px;background:#64a33b;color:#fff;z-index:30;display:none}
-.success-toast.show{display:block}
-.success-icon{position:absolute;left:10px;top:18px;width:20px;height:20px;border-radius:50%;background:#fff}
-.success-icon:after{content:"";position:absolute;left:5px;top:5px;width:9px;height:5px;border-left:2px solid #64a33b;border-bottom:2px solid #64a33b;transform:rotate(-45deg)}
-.success-title,.success-detail{position:absolute;left:43px;font-size:16px;line-height:20px;font-weight:400;white-space:nowrap}
-.success-title{top:7px}.success-detail{top:28px}
-
-/* Additional-data sheet: the supplied clean raster is the visual reference. */
+/* Additional-data sheet: exact supplied raster and exact reference position. */
 .modal-layer{position:fixed;left:0;top:0;width:390px;height:777px;z-index:100;display:none;background:rgba(0,0,0,.62)}
 .modal-layer.open{display:block}
-.modal-sheet{position:absolute;left:0;top:18px;width:390px;height:759px;background:#b4d5d2 url('./images/modal_sheet_clean.png') center top/390px 658px no-repeat;border-radius:28px 28px 0 0;overflow:hidden}
-.modal-close{position:absolute;left:8px;top:14px;width:52px;height:52px;border:0;background:transparent;padding:0;cursor:pointer;z-index:4}
+.modal-sheet{position:absolute;left:0;top:82px;width:390px;height:658px;background:#b4d5d2 url('./images/modal_sheet_clean.png') center top/390px 658px no-repeat;border-radius:28px 28px 0 0;overflow:hidden}
+.modal-close{position:absolute;left:9px;top:18px;width:55px;height:55px;border:0;background:transparent;padding:0;cursor:pointer;z-index:4}
 </style>
 <link rel="manifest" href="manifest.json">
 </head>
@@ -80,17 +71,9 @@ body{background:#b4d5d2;color:#212121}
     <div class="dynamic timer" id="timerOverlay"></div>
     <div class="dynamic company-bus" id="companyBusOverlay"></div>
 
-    <div class="bus-ride-pill" id="busRidePill">
-      <span class="label">Квиток</span><span class="value">Проїзд(Автобус)</span>
-    </div>
+    <div class="bus-ride-pill" id="busRidePill"><span class="label">Квиток</span><span class="value">Проїзд(Автобус)</span></div>
   </section>
-
   <div class="history">Ви зможете заново відкрити цю сторінку<br>через історію браузера</div>
-  <div class="success-toast" id="successToast">
-    <span class="success-icon"></span>
-    <span class="success-title">Оплата успішна</span>
-    <span class="success-detail" id="successDetail">1 квиток за 25 UAH</span>
-  </div>
 </main>
 
 <div class="modal-layer" id="modalLayer" onclick="backdropClose(event)">
@@ -104,21 +87,13 @@ const n=localStorage.getItem('transportNumber')||'006';
 const q=Math.max(1,Number(localStorage.getItem('ticketQuantity'))||1);
 const bus=n.length===4;
 
-const numberEl=document.getElementById('numberOverlay');
-const dateEl=document.getElementById('dateOverlay');
-const qtyEl=document.getElementById('qtyOverlay');
-const companyEl=document.getElementById('companyBusOverlay');
-const companyMask=document.getElementById('companyMask');
-const rideMask=document.getElementById('rideMask');
-const busRidePill=document.getElementById('busRidePill');
+document.getElementById('numberOverlay').textContent=n;
+document.getElementById('qtyOverlay').textContent=q;
 
-numberEl.textContent=n;
-qtyEl.textContent=q;
-
-companyMask.style.display=bus?'block':'none';
-companyEl.style.display=bus?'block':'none';
-busRidePill.style.display=bus?'flex':'none';
-rideMask.style.display=bus?'block':'none';
+document.getElementById('companyMask').style.display=bus?'block':'none';
+document.getElementById('companyBusOverlay').style.display=bus?'block':'none';
+document.getElementById('busRidePill').style.display=bus?'flex':'none';
+document.getElementById('rideMask').style.display=bus?'block':'none';
 
 let paymentTime=Number(localStorage.getItem('paymentTime'));
 let expirationTime=Number(localStorage.getItem('expirationTime'));
@@ -130,18 +105,16 @@ function formatDate(ts){
   const d=new Date(ts);
   return String(d.getDate()).padStart(2,'0')+' '+months[d.getMonth()]+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
 }
-dateEl.textContent=formatDate(paymentTime);
+document.getElementById('dateOverlay').textContent=formatDate(paymentTime);
 
 function tick(){
   const left=Math.max(0,expirationTime-Date.now());
   const s=Math.floor(left/1000);
-  const mm=Math.floor(s/60);
-  const ss=s%60;
+  const mm=Math.floor(s/60), ss=s%60;
   document.getElementById('timerOverlay').textContent=String(mm).padStart(2,'0')+':'+String(ss).padStart(2,'0');
   if(left<=0)clearInterval(timerId);
 }
-const timerId=setInterval(tick,250);
-tick();
+const timerId=setInterval(tick,250); tick();
 
 let qrOpen=false;
 function toggleQR(){
@@ -149,18 +122,9 @@ function toggleQR(){
   document.getElementById('ticketBg').src=qrOpen?'images/ticket_open.png':'images/ticket_closed.png';
   document.getElementById('qrHit').setAttribute('aria-label',qrOpen?'Закрити QR':'Переглянути QR');
 }
-
 function openModal(){document.getElementById('modalLayer').classList.add('open')}
 function closeModal(){document.getElementById('modalLayer').classList.remove('open')}
 function backdropClose(e){if(e.target===document.getElementById('modalLayer'))closeModal()}
-
-const showSuccess=localStorage.getItem('showSuccessToast')==='1';
-if(showSuccess){
-  const detail=q===1?'1 квиток за 25 UAH':q+' квитки за '+(q*25)+' UAH';
-  document.getElementById('successDetail').textContent=detail;
-  document.getElementById('successToast').classList.add('show');
-  localStorage.removeItem('showSuccessToast');
-}
 </script>
 </body>
 </html>
