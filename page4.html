@@ -1,72 +1,108 @@
 <!doctype html>
 <html lang="uk"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="viewport" content="width=390, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#b4d5d2"><title>Квиток</title>
 <style>
-@font-face{font-family:Comfortaa;src:url('./images/Comfortaa-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
-@font-face{font-family:Comfortaa;src:url('./images/Comfortaa-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+@font-face{font-family:Comfortaa;src:url('./images/Comfortaa-Regular.ttf') format('truetype');font-weight:400;font-display:block}
+@font-face{font-family:Comfortaa;src:url('./images/Comfortaa-Bold.ttf') format('truetype');font-weight:700;font-display:block}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%;font-family:Comfortaa,Arial,sans-serif}
+html,body{margin:0;width:390px;height:777px;overflow:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%;font-family:Comfortaa,Arial,sans-serif}
 body{background:#b4d5d2;color:#212121}
-.page{position:relative;width:390px;height:777px;margin:0 auto;overflow:hidden;padding-top:59px}
-.ticket-wrap{position:relative;width:358px;height:514px;margin-left:16px}
-.ticket-bg{position:absolute;inset:0;width:358px;height:514px;display:block}
-.hit-info,.hit-qr{position:absolute;border:0;background:transparent;padding:0;cursor:pointer;z-index:5}
+.page{position:relative;width:390px;height:777px;margin:0;padding-top:59px;overflow:hidden}
+.ticket-wrap{position:relative;width:358px;height:514px;margin-left:16px;overflow:hidden}
+.ticket-bg{position:absolute;left:0;top:0;width:358px;height:514px;display:block}
+/* Exact-position masks keep the raster reference intact while allowing the agreed dynamic data. */
+.mask{position:absolute;background:#fff;z-index:3;pointer-events:none}
+.mask-number{left:301px;top:96px;width:41px;height:31px}
+.mask-date{left:14px;top:363px;width:94px;height:22px}
+.mask-qty{left:293px;top:363px;width:49px;height:22px}
+.mask-timer{left:149px;top:413px;width:62px;height:37px}
+.mask-company{left:60px;top:16px;width:250px;height:54px}
+.mask-ride{left:174px;top:473px;width:110px;height:23px}
+.dynamic{position:absolute;z-index:4;font-family:Comfortaa,Arial,sans-serif;background:transparent;color:#212121;white-space:nowrap;margin:0;padding:0}
+.number{left:301px;top:96px;width:41px;font-size:24px;line-height:29px;font-weight:400;text-align:right}
+.date{left:15px;top:365px;font-size:16px;line-height:19px;font-weight:400}
+.qty{left:293px;top:365px;width:49px;font-size:16px;line-height:19px;font-weight:400;text-align:right}
+.timer{left:149px;top:414px;width:62px;font-size:24px;line-height:30px;font-weight:700;color:#64a33b;text-align:center}
+.company-bus{left:63px;top:19px;width:244px;height:47px;white-space:normal;font-size:15px;line-height:17px;color:#757575;text-align:left}
+.ride-bus{left:174px;top:475px;width:110px;font-size:16px;line-height:18px;color:#64a33b;text-align:center}
+.hit-info,.hit-qr{position:absolute;border:0;background:transparent;padding:0;cursor:pointer;z-index:8;-webkit-appearance:none;appearance:none}
 .hit-info{left:307px;top:17px;width:34px;height:34px}
+/* One fixed hit area is used for both states: person -> QR -> person. */
 .hit-qr{left:67px;top:278px;width:224px;height:44px}
-.dynamic{position:absolute;z-index:4;font-family:Comfortaa,Arial,sans-serif;background:#fff;color:#212121;white-space:nowrap}
-.number{right:16px;top:96px;font-size:24px;line-height:29px;font-weight:400;min-width:38px;text-align:right;padding:0 0 1px}
-.date{left:15px;top:364px;font-size:16px;line-height:19px;padding:0 2px}
-.qty{right:15px;top:364px;font-size:16px;line-height:19px;min-width:12px;text-align:right;padding:0 1px}
-.timer{left:151px;top:431px;font-size:24px;line-height:30px;font-weight:700;color:#64a33b;padding:0 2px}
-.company-bus{left:63px;top:19px;width:244px;height:47px;white-space:normal;font-size:15px;line-height:17px;color:#757575;padding:0}
-.ride-bus{left:181px;top:475px;min-width:48px;font-size:16px;line-height:17px;color:#64a33b;padding:0 1px}
 .history{position:absolute;left:16px;top:582px;width:358px;text-align:center;color:#8a9094;font-size:12px;line-height:17px;font-weight:400}
-.modal-layer{position:fixed;inset:0;z-index:100;display:none;background:rgba(0,0,0,.62)}
+
+/* Modal: full-screen dimmer + exact sheet artwork, without the dark strip baked into the supplied sheet image. */
+.modal-layer{position:fixed;left:0;top:0;width:390px;height:777px;z-index:100;display:none;background:rgba(0,0,0,.62)}
 .modal-layer.open{display:block}
-.modal-sheet{position:absolute;left:0;top:59px;width:390px;height:681.333px;background:#b4d5d2 url('./images/modal_sheet.png') center top/390px auto no-repeat;border-radius:28px 28px 0 0;overflow:hidden}
+.modal-sheet{position:absolute;left:0;top:59px;width:390px;height:681px;background:#b4d5d2 url('./images/modal_sheet.png') center -55px/390px auto no-repeat;border-radius:28px 28px 0 0;overflow:hidden}
 .modal-close{position:absolute;left:14px;top:17px;width:34px;height:34px;border:0;background:transparent;padding:0;cursor:pointer;z-index:4}
-.modal-bus{position:absolute;left:24px;top:155px;width:342px;height:23px;background:#fff;font:400 16px/18px Comfortaa,Arial,sans-serif;color:#212121;display:none;z-index:3}
+.modal-bus{position:absolute;left:24px;top:155px;width:342px;height:23px;background:#fff;color:#212121;display:none;z-index:3;font:400 16px/18px Comfortaa,Arial,sans-serif;white-space:nowrap}
 .modal-layer.bus .modal-bus{display:block}
-@media(max-width:389px){.page{width:100%}.ticket-wrap{margin-left:calc((100% - 358px)/2)}.history{left:calc((100% - 358px)/2)}.modal-sheet{width:100%;background-size:100% auto}}
-</style><link rel="manifest" href="manifest.json"></head>
-<body><main class="page"><section class="ticket-wrap" id="ticketWrap">
+</style>
+<link rel="manifest" href="manifest.json"></head>
+<body>
+<main class="page">
+<section class="ticket-wrap" id="ticketWrap">
 <img id="ticketBg" class="ticket-bg" src="images/ticket_closed.png" alt="Квиток">
+<div class="mask mask-number"></div><div class="mask mask-date"></div><div class="mask mask-qty"></div><div class="mask mask-timer"></div>
+<div class="mask mask-company" id="companyMask" style="display:none"></div><div class="mask mask-ride" id="rideMask" style="display:none"></div>
 <button class="hit-info" onclick="openModal()" aria-label="Додаткові дані"></button>
-<button class="hit-qr" id="qrHit" onclick="openQR()" aria-label="Переглянути QR"></button>
-<div class="dynamic number" id="numberOverlay"></div><div class="dynamic date" id="dateOverlay"></div><div class="dynamic qty" id="qtyOverlay"></div><div class="dynamic timer" id="timerOverlay"></div><div class="dynamic company-bus" id="companyBusOverlay"></div><div class="dynamic ride-bus" id="rideBusOverlay"></div>
-</section><div class="history">Ви зможете заново відкрити цю сторінку<br>через історію браузера</div></main>
-<div class="modal-layer" id="modalLayer" onclick="backdropClose(event)"><div class="modal-sheet"><button class="modal-close" onclick="closeModal()" aria-label="Закрити"></button><div class="modal-bus">КП ВІННИЦЬКА ТРАНСПОРТНА КОМПАНІЯ АВТОБУСИ</div></div></div>
+<button class="hit-qr" id="qrHit" onclick="toggleQR()" aria-label="Переглянути QR"></button>
+<div class="dynamic number" id="numberOverlay"></div>
+<div class="dynamic date" id="dateOverlay"></div>
+<div class="dynamic qty" id="qtyOverlay"></div>
+<div class="dynamic timer" id="timerOverlay"></div>
+<div class="dynamic company-bus" id="companyBusOverlay"></div>
+<div class="dynamic ride-bus" id="rideBusOverlay"></div>
+</section>
+<div class="history">Ви зможете заново відкрити цю сторінку<br>через історію браузера</div>
+</main>
+
+<div class="modal-layer" id="modalLayer" onclick="backdropClose(event)">
+  <div class="modal-sheet">
+    <button class="modal-close" onclick="closeModal()" aria-label="Закрити"></button>
+    <div class="modal-bus">КП ВІННИЦЬКА ТРАНСПОРТНА КОМПАНІЯ АВТОБУСИ</div>
+  </div>
+</div>
 <script>
 const n=localStorage.getItem('transportNumber')||'006';
 const q=Math.max(1,Number(localStorage.getItem('ticketQuantity'))||1);
 const bus=n.length===4;
-// Page 4 amount is fixed at 25 UAH by the agreed specification, regardless of ticket count.
-const amount=25;
-document.getElementById('numberOverlay').textContent=n;
-document.getElementById('qtyOverlay').textContent=q;
-document.getElementById('companyBusOverlay').textContent=bus?'КП Вінницька транспортна компанія автобуси':'';
-document.getElementById('rideBusOverlay').textContent=bus?'Проїзд(Автобус)':'';
-// The reference card already contains 006/1/default data. Hide overlays when the reference value is identical.
-function hideIfDefault(id, value, def){document.getElementById(id).style.display=(String(value)===String(def))?'none':'block'}
-hideIfDefault('numberOverlay',n,'006');
-hideIfDefault('qtyOverlay',q,'1');
-document.getElementById('companyBusOverlay').style.display=bus?'block':'none';
-document.getElementById('rideBusOverlay').style.display=bus?'block':'none';
-// Payment timestamp: use the exact moment payment was confirmed, persisted for history reloads.
+
+// The ticket page uses the agreed fixed fare display: 25 UAH.
+const numberEl=document.getElementById('numberOverlay');
+const dateEl=document.getElementById('dateOverlay');
+const qtyEl=document.getElementById('qtyOverlay');
+const companyEl=document.getElementById('companyBusOverlay');
+const rideEl=document.getElementById('rideBusOverlay');
+numberEl.textContent=n;
+qtyEl.textContent=q;
+companyEl.textContent='КП Вінницька транспортна компанія автобуси';
+rideEl.textContent='Проїзд(Автобус)';
+
+document.getElementById('companyMask').style.display=bus?'block':'none';
+document.getElementById('rideMask').style.display=bus?'block':'none';
+companyEl.style.display=bus?'block':'none';
+rideEl.style.display=bus?'block':'none';
+
 let paymentTime=Number(localStorage.getItem('paymentTime'));
 let expirationTime=Number(localStorage.getItem('expirationTime'));
 if(!paymentTime){paymentTime=Date.now();localStorage.setItem('paymentTime',String(paymentTime))}
 if(!expirationTime){expirationTime=paymentTime+3600000;localStorage.setItem('expirationTime',String(expirationTime))}
 const months=['січ.','лют.','бер.','квіт.','трав.','черв.','лип.','серп.','вер.','жовт.','лист.','груд.'];
 function formatDate(ts){const d=new Date(ts);return String(d.getDate()).padStart(2,'0')+' '+months[d.getMonth()]+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}
-const dateText=formatDate(paymentTime);
-// Reference screenshot contains a fixed sample date; the real ticket uses payment time.
-const dateEl=document.getElementById('dateOverlay');dateEl.textContent=dateText;
+dateEl.textContent=formatDate(paymentTime);
 function tick(){const left=Math.max(0,expirationTime-Date.now());const s=Math.floor(left/1000);const mm=Math.floor(s/60);const ss=s%60;document.getElementById('timerOverlay').textContent=String(mm).padStart(2,'0')+':'+String(ss).padStart(2,'0');if(left<=0)clearInterval(timerId)}
 const timerId=setInterval(tick,250);tick();
-function openQR(){document.getElementById('ticketBg').src='images/ticket_open.png';document.getElementById('qrHit').style.display='none'}
+
+let qrOpen=false;
+function toggleQR(){
+  qrOpen=!qrOpen;
+  document.getElementById('ticketBg').src=qrOpen?'images/ticket_open.png':'images/ticket_closed.png';
+  document.getElementById('qrHit').setAttribute('aria-label',qrOpen?'Закрити QR':'Переглянути QR');
+}
 function openModal(){document.getElementById('modalLayer').classList.add('open');if(bus)document.getElementById('modalLayer').classList.add('bus')}
 function closeModal(){document.getElementById('modalLayer').classList.remove('open','bus')}
-function backdropClose(e){if(e.target.id==='modalLayer')closeModal()}
+function backdropClose(e){if(e.target===document.getElementById('modalLayer'))closeModal()}
 </script></body></html>
