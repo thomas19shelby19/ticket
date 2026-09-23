@@ -15,7 +15,7 @@ body{background:#b4d5d2;color:#212121}
 .ticket-wrap{position:relative;width:358px;height:514px;margin-left:16px;overflow:hidden}
 .ticket-bg{position:absolute;left:0;top:0;width:358px;height:514px;display:block}
 
-/* All ticket geometry is fixed to the supplied 390×777 reference. */
+/* Геометрія масок */
 .mask{position:absolute;background:#fff;z-index:3;pointer-events:none}
 .mask-number{left:288px;top:96px;width:54px;height:23px}
 .mask-date{left:12px;top:365px;width:118px;height:22px}
@@ -24,24 +24,24 @@ body{background:#b4d5d2;color:#212121}
 .mask-company{left:61px;top:7px;width:241px;height:54px;display:none}
 .mask-ride{left:98px;top:438px;width:162px;height:40px;display:none}
 
-/* Dynamic values */
+/* Динамічні значення */
 .dynamic{position:absolute;z-index:4;background:transparent;color:#212121;white-space:nowrap;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Segoe UI",Arial,sans-serif}
 .number{left:292px;top:97px;width:50px;font-size:21px;line-height:25px;font-weight:400;text-align:right}
 .date{left:16px;top:366px;font-size:16px;line-height:20px;font-weight:400}
 .qty{left:293px;top:366px;width:50px;font-size:16px;line-height:20px;font-weight:400;text-align:center}
 .timer{left:149px;top:432px;width:60px;font-size:22px;line-height:27px;font-weight:400;color:#64a33b;text-align:center}
 
-/* Точний системний шрифт та позиціонування як на скріншоті */
+/* Фінальне позиціонування та системний шрифт iOS/Android */
 .company-bus{
   position:absolute;
   left:60px;
-  top:10px;
+  top:14px;
   width:230px;
-  height:42px;
+  height:36px;
   white-space:normal;
   font-family:-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-  font-size:13.5px;
-  line-height:16px;
+  font-size:13px;
+  line-height:15px;
   font-weight:400;
   color:#757575;
   letter-spacing:-0.1px;
