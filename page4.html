@@ -31,8 +31,23 @@ body{background:#b4d5d2;color:#212121}
 .qty{left:293px;top:366px;width:50px;font-size:16px;line-height:20px;font-weight:400;text-align:center}
 .timer{left:149px;top:432px;width:60px;font-size:22px;line-height:27px;font-weight:400;color:#64a33b;text-align:center}
 
-/* Точне позиціонування тексту для збереження однакового вигляду */
-.company-bus{position:absolute;left:61px;top:8px;width:241px;height:54px;white-space:normal;font-family:Comfortaa,Arial,sans-serif;font-size:14px;line-height:17px;font-weight:400;color:#757575;text-align:left;display:none}
+/* Точний системний шрифт iOS як на скріншоті */
+.company-bus{
+  position:absolute;
+  left:60px;
+  top:10px;
+  width:241px;
+  height:42px;
+  white-space:normal;
+  font-family:-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  font-size:13.5px;
+  line-height:16px;
+  font-weight:400;
+  color:#757575;
+  letter-spacing:-0.1px;
+  text-align:left;
+  display:none;
+}
 
 .bus-ride-pill{position:absolute;left:101px;top:473px;width:156px;height:24px;border-radius:6px;background:#dfecd5;z-index:5;display:none;align-items:center;justify-content:center;gap:3px;font-family:Comfortaa,Arial,sans-serif;font-size:10.5px;line-height:24px;font-weight:400;white-space:nowrap}
 .bus-ride-pill .label{color:#6c726d}.bus-ride-pill .value{color:#64a33b}
@@ -102,7 +117,6 @@ document.getElementById('numberOverlay').textContent=n||'006';
 document.getElementById('qtyOverlay').textContent=q;
 document.getElementById('companyMask').style.display=bus?'block':'none';
 document.getElementById('companyBusOverlay').style.display=bus?'block':'none';
-/* Слово "автобуси" знаходиться в одному рядку зі словом "компанія" */
 document.getElementById('companyBusOverlay').innerHTML=bus?'КП Вінницька транспортна<br>компанія автобуси':'';
 document.getElementById('busRidePill').style.display=bus?'flex':'none';
 document.getElementById('rideMask').style.display=bus?'block':'none';
