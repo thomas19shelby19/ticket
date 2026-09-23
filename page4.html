@@ -21,7 +21,7 @@ body{background:#b4d5d2;color:#212121}
 .mask-date{left:12px;top:365px;width:118px;height:22px}
 .mask-qty{left:286px;top:365px;width:56px;height:22px}
 .mask-timer{left:146px;top:431px;width:67px;height:31px}
-.mask-company{left:63px;top:8px;width:239px;height:54px;display:none}
+.mask-company{left:61px;top:7px;width:241px;height:54px;display:none}
 .mask-ride{left:98px;top:438px;width:162px;height:40px;display:none}
 
 /* Dynamic values use the same system face visible in the reference ticket. */
@@ -30,8 +30,7 @@ body{background:#b4d5d2;color:#212121}
 .date{left:16px;top:366px;font-size:16px;line-height:20px;font-weight:400}
 .qty{left:293px;top:366px;width:50px;font-size:16px;line-height:20px;font-weight:400;text-align:center}
 .timer{left:149px;top:432px;width:60px;font-size:22px;line-height:27px;font-weight:400;color:#64a33b;text-align:center}
-.company-bus{left:63px;top:11px;width:239px;height:42px;white-space:normal;font-family:Comfortaa,Arial,sans-serif;font-size:14px;line-height:17px;font-weight:400;color:#757575;text-align:left;display:none}
-.company-bus-logo{position:absolute;left:17px;top:12px;width:48px;height:45px;object-fit:contain;z-index:4;display:none;pointer-events:none}
+.company-bus{left:61px;top:10px;width:241px;height:42px;white-space:normal;font-family:Comfortaa,Arial,sans-serif;font-size:14px;line-height:17px;font-weight:400;color:#757575;text-align:left;display:none}
 
 .bus-ride-pill{position:absolute;left:101px;top:473px;width:156px;height:24px;border-radius:6px;background:#dfecd5;z-index:5;display:none;align-items:center;justify-content:center;gap:3px;font-family:Comfortaa,Arial,sans-serif;font-size:10.5px;line-height:24px;font-weight:400;white-space:nowrap}
 .bus-ride-pill .label{color:#6c726d}.bus-ride-pill .value{color:#64a33b}
@@ -79,7 +78,7 @@ body{background:#b4d5d2;color:#212121}
     <div class="dynamic date" id="dateOverlay"></div>
     <div class="dynamic qty" id="qtyOverlay"></div>
     <div class="dynamic timer" id="timerOverlay"></div>
-    <img class="company-bus-logo" id="companyBusLogo" src="images/company_logo_crop.png" alt=""><div class="dynamic company-bus" id="companyBusOverlay"></div>
+    <div class="dynamic company-bus" id="companyBusOverlay"></div>
 
     <div class="bus-ride-pill" id="busRidePill"><span class="label">Квиток</span><span class="value">Проїзд(Автобус)</span></div>
   </section>
@@ -100,7 +99,7 @@ const bus=n.length===4;
 document.getElementById('numberOverlay').textContent=n||'006';
 document.getElementById('qtyOverlay').textContent=q;
 document.getElementById('companyMask').style.display=bus?'block':'none';
-document.getElementById('companyBusOverlay').style.display=bus?'block':'none';document.getElementById('companyBusLogo').style.display=bus?'block':'none';document.getElementById('companyBusOverlay').innerHTML=bus?'КП Вінницька транспортна<br>компанія автобуси':'';
+document.getElementById('companyBusOverlay').style.display=bus?'block':'none';document.getElementById('companyBusOverlay').innerHTML=bus?'КП Вінницька транспортна<br>компанія автобуси':'';
 document.getElementById('busRidePill').style.display=bus?'flex':'none';
 document.getElementById('rideMask').style.display=bus?'block':'none';
 
