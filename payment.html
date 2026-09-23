@@ -5,33 +5,48 @@
 @font-face{font-family:Comfortaa;src:url('./images/Comfortaa-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
 @font-face{font-family:Comfortaa;src:url('./images/Comfortaa-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;width:390px;height:777px;overflow:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%;font-family:Comfortaa,Arial,sans-serif}
-body{background:#BAD4D2;color:#212121}
-.app{position:relative;width:390px;height:777px;margin:0 auto;padding:97px 16px 0;overflow:hidden}
-.summary-card{height:154px;margin:0 0 18px;padding:17px;background:#fff;border-radius:17px;box-shadow:0 2px 6px rgba(0,0,0,.12)}
-.logo{font-size:20px;line-height:24px;font-weight:700;color:#444;margin-bottom:17px}.logo span{color:#4fc54c}
-.summary-title{font-size:15px;line-height:20px;margin:0 0 20px}
-.dash{height:2px;border-top:2px dashed #d4d4d4;margin:0 0 18px}
-.total{height:24px;display:flex;justify-content:space-between;align-items:center}
-.label{font-size:15px;line-height:24px}.price{font-size:19px;line-height:24px;font-weight:700}
-.pay{display:flex;align-items:center;justify-content:center;width:358px;height:47px;border:0;border-radius:10px;background:#000;color:#fff;font:400 18px/47px Comfortaa,Arial,sans-serif;margin:0 0 16px;padding:0;cursor:pointer}
-.pay-image img{max-width:58%;max-height:72%;object-fit:contain;display:block}
-.apple{margin-bottom:16px}
-.or{height:20px;display:flex;align-items:center;gap:14px;margin:0 0 18px}
-.line{height:1px;background:#c7c7c7;flex:1}.or span{font-size:15px;line-height:20px}
-.form{width:358px;height:248px;background:#fff;border-radius:17px;padding:17px 12px 0;box-shadow:0 2px 6px rgba(0,0,0,.12);overflow:hidden}
-.field{display:block;font-size:17px;line-height:19px;margin:0 8px}
-input{display:block;width:100%;height:34px;border:0;border-radius:9px;background:#eee;padding:0 12px;font:16px/34px Comfortaa,Arial,sans-serif;outline:0;margin:0 0 19px;color:#212121}
-input::placeholder{color:#9c9c9c;opacity:1}.card-number{border:1px solid #2774ff;box-shadow:0 0 0 4px rgba(39,116,255,.10)}
-.two{display:flex;gap:13px;margin:0}.half{flex:1;min-width:0}.half .field{margin:0}
-.form > input[type="email"]{margin-bottom:0}
+html,body{margin:0;width:390px;height:777px;overflow:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif}
+body{background:#EFF1F3;color:#212121}
+.app{position:relative;width:390px;height:777px;margin:0 auto;overflow:hidden;padding:61px 13.667px 0}
+.summary-card{position:relative;width:362.333px;height:164px;margin:0 0 13px;padding:18px 14px;background:#fff;border-radius:17px;box-shadow:0 2px 6px rgba(0,0,0,.12)}
+.liqpay-logo{position:absolute;left:14px;top:18px;width:70px;height:auto;display:block}
+.summary-title{position:absolute;left:6px;top:54px;font-size:15px;line-height:20px;font-weight:400}
+.dash{position:absolute;left:6px;right:11px;top:112.333px;border-top:2px dashed #d4d4d4;height:0}
+.summary-total{position:absolute;left:6px;right:14px;top:131.667px;height:24px;display:flex;justify-content:space-between;align-items:center}
+.summary-total .label{font-size:15px;line-height:24px}.summary-total .price{font-size:19px;line-height:24px;font-weight:700}
+.pay{display:flex;align-items:center;justify-content:center;width:362.333px;height:41px;border:0;border-radius:10px;background:#000;color:#fff;margin:0 0 12px;padding:0;cursor:pointer}
+.google-copy{font-size:18px;line-height:42px;font-weight:500;white-space:nowrap;margin-right:7px}.google-img{width:57px;height:auto;display:block}
+.apple{margin-bottom:13px}.apple-img{width:66px;height:auto;display:block}
+.or{position:relative;width:362.333px;height:20px;margin:0 0 15.334px;display:flex;align-items:center;justify-content:center;gap:14px}
+.or .line{height:1px;background:#cfd0d1;flex:1}.or span{font-size:15px;line-height:20px;font-weight:600}
+.form{position:relative;width:362.333px;height:300px;background:#fff;border-radius:17px;padding:0;box-shadow:0 2px 6px rgba(0,0,0,.12);overflow:hidden}
+.field{position:absolute;left:10px;font-size:15px;line-height:20px;font-weight:400;white-space:nowrap}
+.card-label{top:19px}.card-input{position:absolute;left:10px;top:37px;width:342px;height:47px;border:0;border-radius:9px;background:#e6edfb;box-shadow:0 0 0 0 #e6edfb;outline:0;padding:0;color:#212121}
+.icon{position:absolute;object-fit:contain;pointer-events:none;z-index:2}
+.card-icon{left:12px;top:17px;width:25px;height:25px}.calendar-icon{left:10px;top:4px;width:25px;height:25px}.cvv-icon{left:10px;top:4px;width:25px;height:25px}.email-icon{left:10px;top:8px;width:25px;height:25px}
+.two{position:absolute;left:13.333px;top:102.3px;width:338px;display:flex;gap:13px}.half{position:relative;width:162.5px;height:62px}.half .field{left:0;top:0}.input-small{position:absolute;left:0;top:20px;width:162.5px;height:40px;border:0;border-radius:9px;background:#ebebeb;outline:0;padding:0 12px 0 44px;font:16px/40px Comfortaa,Arial,sans-serif;color:#6c6c6c}.cvv-info{position:absolute;right:4px;top:3.333px;width:33px;height:33px;border-radius:9px;background:#fff;box-shadow:0 2px 7px rgba(0,0,0,.22);z-index:3;padding:0}.cvv-info img{width:22px;height:22px;display:block;margin:6px}
+.terms{position:absolute;left:10px;top:175px;width:342px;margin:0;font-size:12px;line-height:20px;font-weight:400}.terms a{color:#357b47;text-decoration:underline;font-weight:600}
+.pay-final{position:absolute;left:14px;top:246px;width:334px;height:41px;border:0;border-radius:9px;background:linear-gradient(100deg,#9ad86a 0%,#28aebc 100%);color:#fff;font:700 16px/41px Comfortaa,Arial,sans-serif;padding:0}
+.email-card{position:absolute;left:13.667px;top:694px;width:362.333px;height:150px;background:#fff;border-radius:17px;box-shadow:0 2px 6px rgba(0,0,0,.12);padding:0;overflow:hidden}
+.email-label{position:absolute;left:10px;top:19px;font-size:15px;line-height:20px;white-space:nowrap}
+.email-input{position:absolute;left:10px;top:83px;width:342px;height:40px;border:0;border-radius:9px;background:#ebebeb;outline:0;padding:0 12px 0 44px;font:16px/40px Comfortaa,Arial,sans-serif;color:#9c9c9c}.email-input::placeholder{color:#9c9c9c;opacity:1}
 </style><link rel="manifest" href="manifest.json"></head><body><main class="app">
-<section class="summary-card"><div class="logo">LIQPAY <span>»</span></div><div class="summary-title">Оплата проїзду</div><div class="dash"></div><div class="total"><span class="label">До оплати</span><span class="price" id="totalPrice">25.00 UAH</span></div></section>
-<button class="pay pay-image" onclick="confirmPayment()"><img src="./images/GooglePay.PNG" alt="Google Pay"></button>
-<button class="pay apple pay-image" onclick="confirmPayment()"><img src="./images/applePay.PNG" alt="Apple Pay"></button>
+<section class="summary-card"><img class="liqpay-logo" src="./images/liqpay_logo.png" alt="LIQPAY"><div class="summary-title">Оплата проїзду</div><div class="dash"></div><div class="summary-total"><span class="label">До оплати</span><span class="price" id="totalPrice">25.00 UAH</span></div></section>
+<button class="pay" onclick="confirmPayment()"><span class="google-copy">Оплатити через</span><img class="google-img" src="./images/GooglePay.PNG" alt="G Pay"></button>
+<button class="pay apple" onclick="confirmPayment()"><img class="apple-img" src="./images/applePay.PNG" alt="Apple Pay"></button>
 <div class="or"><div class="line"></div><span>або</span><div class="line"></div></div>
-<section class="form"><label class="field">Номер картки</label><input class="card-number" type="text" inputmode="numeric" autocomplete="cc-number"><div class="two"><div class="half"><label class="field">Термін дії</label><input type="text" placeholder="MM / PP" maxlength="5" autocomplete="cc-exp"></div><div class="half"><label class="field">CVV2 / CVC2</label><input type="password" placeholder="123" maxlength="3" autocomplete="cc-csc"></div></div><label class="field">Email для отримання квитанції</label><input type="email" placeholder="example@domain.com" autocomplete="email"></section>
+<section class="form">
+  <label class="field card-label">Номер картки</label>
+  <div class="card-input"><img class="icon card-icon" src="./images/card_icon.png" alt=""><input aria-label="Номер картки" style="position:absolute;left:3.333px;top:3.333px;width:335.333px;height:40.333px;border:1px solid #3A6AE8;border-radius:8px;background:#ebebeb;outline:0;padding:0 10px 0 44px;font:16px/40px Comfortaa,Arial,sans-serif"></div>
+  <div class="two">
+    <div class="half"><label class="field">Термін дії</label><div class="input-small"><img class="icon calendar-icon" src="./images/calendar_icon.png" alt=""><input aria-label="Термін дії" placeholder="MM / PP" maxlength="5" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;background:transparent;outline:0;padding:0 8px 0 44px;font:16px/40px Comfortaa,Arial,sans-serif;color:#6c6c6c"></div></div>
+    <div class="half"><label class="field">CVV2 / CVC2</label><div class="input-small"><img class="icon cvv-icon" src="./images/cvv_icon.png" alt=""><input aria-label="CVV2 / CVC2" type="password" placeholder="123" maxlength="3" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;background:transparent;outline:0;padding:0 45px 0 44px;font:16px/40px Comfortaa,Arial,sans-serif;color:#6c6c6c"><button class="cvv-info" type="button"><img src="./images/button_i.PNG" alt="i"></button></div></div>
+  </div>
+  <p class="terms">Натискаючи на кнопку «Оплатити», ви підтверджуєте що<br>ознайомлені з переліком інформації про послугу та<br>надаєте згоду з умовами <a href="#">публічного договору</a>.</p>
+  <button class="pay-final" onclick="confirmPayment()">Оплатити <span id="finalAmount">25.00 UAH</span></button>
+</section>
+<section class="email-card"><label class="email-label">Email для отримання квитанції</label><div class="email-input"><img class="icon email-icon" src="./images/email_icon.png" alt=""><input aria-label="Email" placeholder="example@domain.com" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;background:transparent;outline:0;padding:0 10px 0 44px;font:16px/40px Comfortaa,Arial,sans-serif;color:#9c9c9c"></div></section>
 </main><script>
-const total=Number(localStorage.getItem('ticketTotal'))||25;document.getElementById('totalPrice').textContent=total.toFixed(2)+' UAH';
+const total=Number(localStorage.getItem('ticketTotal'))||25;document.getElementById('totalPrice').textContent=total.toFixed(2)+' UAH';document.getElementById('finalAmount').textContent=total.toFixed(2)+' UAH';
 function confirmPayment(){const now=Date.now();localStorage.setItem('paymentTime',String(now));localStorage.setItem('expirationTime',String(now+3600000));window.location.href='page4.html'}
 </script></body></html>
