@@ -31,19 +31,20 @@ body{background:#b4d5d2;color:#212121}
 .qty{left:293px;top:366px;width:50px;font-size:16px;line-height:20px;font-weight:400;text-align:center}
 .timer{left:149px;top:432px;width:60px;font-size:22px;line-height:27px;font-weight:400;color:#64a33b;text-align:center}
 
-/* Точне позиціонування та шрифт Comfortaa як на скріншоті */
+/* Точний системний шрифт та позиціонування як на скріншоті */
 .company-bus{
   position:absolute;
-  left:63px;
-  top:23px;
+  left:60px;
+  top:10px;
   width:230px;
-  height:24px;
-  white-space:nowrap;
-  font-family:Comfortaa, Arial, sans-serif;
-  font-size:14px;
-  line-height:18px;
+  height:42px;
+  white-space:normal;
+  font-family:-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  font-size:13.5px;
+  line-height:16px;
   font-weight:400;
   color:#757575;
+  letter-spacing:-0.1px;
   text-align:left;
   display:none;
 }
@@ -113,7 +114,7 @@ document.getElementById('numberOverlay').textContent=n||'006';
 document.getElementById('qtyOverlay').textContent=q;
 document.getElementById('companyMask').style.display=bus?'block':'none';
 document.getElementById('companyBusOverlay').style.display=bus?'block':'none';
-document.getElementById('companyBusOverlay').textContent=bus?'КП Вінницька транспортна компанія автобуси':'';
+document.getElementById('companyBusOverlay').innerHTML=bus?'КП Вінницька транспортна<br>компанія автобуси':'';
 document.getElementById('busRidePill').style.display=bus?'flex':'none';
 document.getElementById('rideMask').style.display=bus?'block':'none';
 
