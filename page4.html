@@ -15,34 +15,36 @@ body{background:#b4d5d2;color:#212121}
 .ticket-wrap{position:relative;width:358px;height:514px;margin-left:16px;overflow:hidden}
 .ticket-bg{position:absolute;left:0;top:0;width:358px;height:514px;display:block}
 
-/* Геометрія масок (маска компанії вимкнена) */
+/* Геометрія масок */
 .mask{position:absolute;background:#fff;z-index:3;pointer-events:none}
 .mask-number{left:288px;top:96px;width:54px;height:23px}
 .mask-date{left:12px;top:365px;width:118px;height:22px}
 .mask-qty{left:286px;top:365px;width:56px;height:22px}
 .mask-timer{left:146px;top:431px;width:67px;height:31px}
-.mask-company{display:none !important}
+.mask-company{left:61px;top:10px;width:241px;height:45px;display:none}
 .mask-ride{left:98px;top:438px;width:162px;height:40px;display:none}
 
 /* Динамічні значення */
-.dynamic{position:absolute;z-index:4;background:transparent;color:#212121;white-space:nowrap;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Segoe UI",Arial,sans-serif}
+.dynamic{position:absolute;z-index:4;background:transparent;color:#212121;white-space:nowrap;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 .number{left:292px;top:97px;width:50px;font-size:21px;line-height:25px;font-weight:400;text-align:right}
 .date{left:16px;top:366px;font-size:16px;line-height:20px;font-weight:400}
 .qty{left:293px;top:366px;width:50px;font-size:16px;line-height:20px;font-weight:400;text-align:center}
-.timer{left:149px;top:432px;width:60px;font-size:22px;line-height:27px;font-weight:400;color:#64a33b;text-align:center}
+.timer{left:149px;top:432px;width:60px;font-size:22px;line-height:27px;font-weight:400;color:#64a33b;text-align:center;font-family:Comfortaa,Arial,sans-serif}
 
-/* Точне позиціонування лише для слова "автобуси" */
+/* Позиціонування 2-рядкового тексту для автобуса */
 .company-bus{
   position:absolute;
-  left:148px;
-  top:24px;
-  white-space:nowrap;
+  left:61px;
+  top:12px;
+  width:230px;
+  white-space:normal;
   font-family:-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
   font-size:13.5px;
   line-height:16px;
   font-weight:400;
   color:#757575;
   letter-spacing:-0.1px;
+  text-align:left;
   display:none;
 }
 
@@ -110,9 +112,10 @@ const bus=n.length===4;
 document.getElementById('numberOverlay').textContent=n||'006';
 document.getElementById('qtyOverlay').textContent=q;
 
-// Для 4-значного номера додаємо лише слово "автобуси"
-document.getElementById('companyBusOverlay').textContent=bus?'автобуси':'';
+// Маска та 2-рядковий текст для автобуса
+document.getElementById('companyMask').style.display=bus?'block':'none';
 document.getElementById('companyBusOverlay').style.display=bus?'block':'none';
+document.getElementById('companyBusOverlay').innerHTML=bus?'КП Вінницька транспортна<br>компанія автобуси':'';
 
 document.getElementById('busRidePill').style.display=bus?'flex':'none';
 document.getElementById('rideMask').style.display=bus?'block':'none';
