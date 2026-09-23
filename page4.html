@@ -11,7 +11,7 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;width:390px;height:777px;overflow:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%;font-family:Comfortaa,Arial,sans-serif}
 body{background:#b4d5d2;color:#212121}
-.page{position:relative;width:390px;height:777px;margin:0;padding-top:106px;overflow:hidden}
+.page{position:relative;width:390px;height:777px;margin:0;padding-top:59px;overflow:hidden}
 .ticket-wrap{position:relative;width:358px;height:514px;margin-left:16px;overflow:hidden}
 .ticket-bg{position:absolute;left:0;top:0;width:358px;height:514px;display:block}
 
@@ -28,7 +28,7 @@ body{background:#b4d5d2;color:#212121}
 .dynamic{position:absolute;z-index:4;background:transparent;color:#212121;white-space:nowrap;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Segoe UI",Arial,sans-serif}
 .number{left:292px;top:97px;width:50px;font-size:21px;line-height:25px;font-weight:700;text-align:right}
 .date{left:16px;top:366px;font-size:16px;line-height:20px;font-weight:600}
-.qty{left:292px;top:366px;width:50px;font-size:16px;line-height:20px;font-weight:600;text-align:right}
+.qty{left:310px;top:366px;width:50px;font-size:16px;line-height:20px;font-weight:600;text-align:center}
 .timer{left:149px;top:432px;width:60px;font-size:22px;line-height:27px;font-weight:700;color:#64a33b;text-align:center}
 .company-bus{left:61px;top:14px;width:235px;height:40px;white-space:normal;font-family:Comfortaa,Arial,sans-serif;font-size:13px;line-height:17px;font-weight:400;color:#757575;text-align:left;display:none}
 .company-bus-logo{position:absolute;left:16px;top:16px;width:40px;height:39px;object-fit:fill;z-index:4;display:none}
@@ -41,18 +41,18 @@ body{background:#b4d5d2;color:#212121}
 .hit-info{left:307px;top:17px;width:34px;height:34px}
 .hit-qr{left:72px;top:150px;width:214px;height:170px}
 
-.history{position:absolute;left:16px;top:629px;width:358px;text-align:center;color:#8a9094;font-size:12px;line-height:17px;font-weight:400}
+.history{position:absolute;left:16px;top:582px;width:358px;text-align:center;color:#8a9094;font-size:12px;line-height:17px;font-weight:400}
 
 /* Payment confirmation: shown for 2 seconds every time page 4 is opened or refreshed. */
-.payment-success{position:absolute;left:0;top:0;width:358px;height:72px;background:#64A33B;border-radius:7px;z-index:30;display:none;color:#fff}
+.payment-success{position:absolute;left:0;top:0;width:358px;height:74px;background:#64A33B;border-radius:7px;z-index:30;display:none;color:#fff}
 .payment-success.show{display:block}
-.payment-success .check{position:absolute;left:27px;top:34px;width:20px;height:20px;margin:0;border-radius:50%;background:#fff;color:#64A33B;font:700 14px/20px Arial,sans-serif;text-align:center}
-.payment-success .copy{position:absolute;left:39px;top:27px;display:block;line-height:1.1}
+.payment-success .check{position:absolute;left:20px;top:27px;width:20px;height:20px;margin:0;border-radius:50%;background:#fff;color:#64A33B;font:700 14px/20px Arial,sans-serif;text-align:center}
+.payment-success .copy{position:absolute;left:55px;top:16px;display:block;line-height:1.1}
 .payment-success .title{display:block;font:700 14px/18px Comfortaa,Arial,sans-serif;margin:0}
 .payment-success .sub{display:block;font:400 12px/17px Comfortaa,Arial,sans-serif;margin:2px 0 0}
 
 /* Additional-data sheet: exact supplied raster and exact reference position. */
-.modal-layer{position:fixed;left:0;top:0;width:390px;height:777px;z-index:100;display:none;background:rgba(0,0,0,.62)}
+.modal-layer{position:fixed;left:0;top:0;width:100vw;height:calc(100vh + 80px);min-height:100vh;z-index:100;display:none;background:rgba(0,0,0,.62)}
 .modal-layer.open{display:block}
 .modal-sheet{position:absolute;left:0;top:82px;width:390px;height:658px;background:#b4d5d2 url('./images/modal_sheet_clean.png') center top/390px 658px no-repeat;border-radius:28px;overflow:hidden}
 .modal-close{position:absolute;left:9px;top:18px;width:55px;height:55px;border:0;background:transparent;padding:0;cursor:pointer;z-index:4}
