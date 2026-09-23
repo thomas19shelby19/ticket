@@ -30,7 +30,7 @@ body{background:#b4d5d2;color:#212121}
 .date{left:16px;top:366px;font-size:16px;line-height:20px;font-weight:600}
 .qty{left:292px;top:366px;width:50px;font-size:16px;line-height:20px;font-weight:600;text-align:right}
 .timer{left:149px;top:432px;width:60px;font-size:22px;line-height:27px;font-weight:700;color:#64a33b;text-align:center}
-.company-bus{left:41px;top:38px;width:250px;height:34px;white-space:normal;font-family:Comfortaa,Arial,sans-serif;font-size:13px;line-height:17px;font-weight:400;color:#757575;text-align:left;display:none}
+.company-bus{left:41px;top:14px;width:220px;height:38px;white-space:normal;font-family:Comfortaa,Arial,sans-serif;font-size:13px;line-height:17px;font-weight:400;color:#757575;text-align:left;display:none}
 
 .bus-ride-pill{position:absolute;left:101px;top:473px;width:156px;height:24px;border-radius:6px;background:#dfecd5;z-index:5;display:none;align-items:center;justify-content:center;gap:3px;font-family:Comfortaa,Arial,sans-serif;font-size:10.5px;line-height:24px;font-weight:400;white-space:nowrap}
 .bus-ride-pill .label{color:#6c726d}.bus-ride-pill .value{color:#64a33b}
@@ -41,6 +41,14 @@ body{background:#b4d5d2;color:#212121}
 .hit-qr{left:72px;top:150px;width:214px;height:170px}
 
 .history{position:absolute;left:16px;top:582px;width:358px;text-align:center;color:#8a9094;font-size:12px;line-height:17px;font-weight:400}
+
+/* Payment confirmation: shown only once immediately after successful payment. */
+.payment-success{position:absolute;left:0;top:0;width:358px;height:56px;background:#64A33B;border-radius:7px;z-index:30;display:none;color:#fff;align-items:center}
+.payment-success.show{display:flex}
+.payment-success .check{width:28px;height:28px;margin-left:17px;margin-right:12px;border-radius:50%;background:#fff;color:#64A33B;font:700 19px/28px Arial,sans-serif;text-align:center}
+.payment-success .copy{display:flex;flex-direction:column;justify-content:center;line-height:1.1}
+.payment-success .title{font:700 14px/18px Comfortaa,Arial,sans-serif;margin:0}
+.payment-success .sub{font:400 12px/17px Comfortaa,Arial,sans-serif;margin:2px 0 0}
 
 /* Additional-data sheet: exact supplied raster and exact reference position. */
 .modal-layer{position:fixed;left:0;top:0;width:390px;height:777px;z-index:100;display:none;background:rgba(0,0,0,.62)}
@@ -53,6 +61,7 @@ body{background:#b4d5d2;color:#212121}
 <body>
 <main class="page">
   <section class="ticket-wrap" id="ticketWrap">
+    <div class="payment-success" id="paymentSuccess"><span class="check">✓</span><span class="copy"><span class="title">Оплата успішна</span><span class="sub" id="paymentSuccessText">1 квиток за 25 UAH</span></span></div>
     <img id="ticketBg" class="ticket-bg" src="images/ticket_closed.png" alt="Квиток">
 
     <div class="mask mask-number"></div>
@@ -83,13 +92,12 @@ body{background:#b4d5d2;color:#212121}
 </div>
 
 <script>
-const n=localStorage.getItem('transportNumber')||'006';
+const n=(localStorage.getItem('transportNumber')||'006').replace(/\D/g,'');
 const q=Math.max(1,Number(localStorage.getItem('ticketQuantity'))||1);
 const bus=n.length===4;
 
-document.getElementById('numberOverlay').textContent=n;
+document.getElementById('numberOverlay').textContent=n||'006';
 document.getElementById('qtyOverlay').textContent=q;
-
 document.getElementById('companyMask').style.display=bus?'block':'none';
 document.getElementById('companyBusOverlay').style.display=bus?'block':'none';
 document.getElementById('busRidePill').style.display=bus?'flex':'none';
@@ -98,33 +106,30 @@ document.getElementById('rideMask').style.display=bus?'block':'none';
 let paymentTime=Number(localStorage.getItem('paymentTime'));
 let expirationTime=Number(localStorage.getItem('expirationTime'));
 if(!paymentTime){paymentTime=Date.now();localStorage.setItem('paymentTime',String(paymentTime))}
-if(!expirationTime){expirationTime=paymentTime+3600000;localStorage.setItem('expirationTime',String(expirationTime))}
+if(!expirationTime || expirationTime<=paymentTime){expirationTime=paymentTime+3600000;localStorage.setItem('expirationTime',String(expirationTime))}
 
 const months=['січ.','лют.','бер.','квіт.','трав.','черв.','лип.','серп.','вер.','жовт.','лист.','груд.'];
-function formatDate(ts){
-  const d=new Date(ts);
-  return String(d.getDate()).padStart(2,'0')+' '+months[d.getMonth()]+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
-}
+function formatDate(ts){const d=new Date(ts);return String(d.getDate()).padStart(2,'0')+' '+months[d.getMonth()]+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}
 document.getElementById('dateOverlay').textContent=formatDate(paymentTime);
 
-function tick(){
-  const left=Math.max(0,expirationTime-Date.now());
-  const s=Math.floor(left/1000);
-  const mm=Math.floor(s/60), ss=s%60;
-  document.getElementById('timerOverlay').textContent=String(mm).padStart(2,'0')+':'+String(ss).padStart(2,'0');
-  if(left<=0)clearInterval(timerId);
-}
-const timerId=setInterval(tick,250); tick();
+function tick(){const left=Math.max(0,expirationTime-Date.now());const sec=Math.floor(left/1000);const mm=Math.floor(sec/60),ss=sec%60;document.getElementById('timerOverlay').textContent=String(mm).padStart(2,'0')+':'+String(ss).padStart(2,'0');if(left<=0)clearInterval(timerId)}
+const timerId=setInterval(tick,250);tick();
 
 let qrOpen=false;
-function toggleQR(){
-  qrOpen=!qrOpen;
-  document.getElementById('ticketBg').src=qrOpen?'images/ticket_open.png':'images/ticket_closed.png';
-  document.getElementById('qrHit').setAttribute('aria-label',qrOpen?'Закрити QR':'Переглянути QR');
-}
+function toggleQR(){qrOpen=!qrOpen;document.getElementById('ticketBg').src=qrOpen?'images/ticket_open.png':'images/ticket_closed.png';document.getElementById('qrHit').setAttribute('aria-label',qrOpen?'Закрити QR':'Переглянути QR')}
 function openModal(){document.getElementById('modalLayer').classList.add('open')}
 function closeModal(){document.getElementById('modalLayer').classList.remove('open')}
 function backdropClose(e){if(e.target===document.getElementById('modalLayer'))closeModal()}
+
+/* Only payment.html sets this flag. Refreshing page 4 does not replay the banner. */
+const successFlag=sessionStorage.getItem('showPaymentSuccess');
+if(successFlag==='1'){
+  sessionStorage.removeItem('showPaymentSuccess');
+  const banner=document.getElementById('paymentSuccess');
+  document.getElementById('paymentSuccessText').textContent=(q===1?'1 квиток':q+' квитки')+' за 25 UAH';
+  banner.classList.add('show');
+  setTimeout(()=>banner.classList.remove('show'),2000);
+}
 </script>
 </body>
 </html>
