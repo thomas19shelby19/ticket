@@ -3,45 +3,41 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="theme-color" content="#F4C400">
+<meta name="theme-color" content="#000000">
 <link rel="manifest" href="./manifest.json">
 <title>Сканування QR</title>
 <style>
+@font-face{font-family:Comfortaa;src:url('./images/Comfortaa-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:Comfortaa;src:url('./images/Comfortaa-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000;font-family:Comfortaa,Arial,sans-serif}
 .app{position:fixed;inset:0;background:#000;overflow:hidden}
-#reader{position:absolute;inset:0;width:100%;height:100%;background:#000;overflow:hidden}
-#reader video{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:cover!important}
-#reader__scan_region{position:absolute!important;inset:0!important;width:100%!important;height:100%!important}
-#reader__scan_region img,#reader__dashboard,#reader__dashboard_section_csr,#reader__dashboard_section_swaplink,#reader__status_span{display:none!important}
-.safari{position:absolute;left:18px;right:18px;top:75%;transform:translateY(-50%);z-index:5;height:38px;padding:0 14px;border:0;border-radius:8px;background:#F4C400;color:#111;font:700 14px/38px Comfortaa,Arial,sans-serif;box-shadow:0 2px 6px rgba(0,0,0,.22)}
+#camera{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;background:#000}
+.safari{position:absolute;left:50%;top:75%;transform:translate(-50%,-50%);z-index:5;width:177px;height:19px;padding:0;border:0;border-radius:4px;background:#F4C400;color:#111;font:700 9px/19px Comfortaa,Arial,sans-serif;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.22);cursor:pointer}
 </style>
 </head>
 <body>
-<main class="app"><div id="reader"></div><button class="safari" type="button" onclick="goNext()">Відкрити у Safari</button></main>
-<script src="https://unpkg.com/html5-qrcode" defer></script>
+<main class="app">
+  <video id="camera" autoplay playsinline muted></video>
+  <button class="safari" type="button" onclick="goNext()">Перейти у Safari</button>
+</main>
 <script>
-let scanner=null,started=false;
-function goNext(){ if(scanner){scanner.stop().catch(()=>{});scanner=null} window.location.href='page2.html'; }
+let stream=null;
 async function startCamera(){
-  if(started)return;
-  if(typeof Html5Qrcode==='undefined'){setTimeout(startCamera,250);return;}
-  started=true;
-  scanner=new Html5Qrcode('reader');
+  if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return;
   try{
-    await scanner.start({facingMode:{exact:'environment'}},{fps:10,qrbox:{width:250,height:250}},decoded=>{
-      localStorage.setItem('scannedQr',decoded);
-      goNext();
-    },()=>{});
-  }catch(e){
-    try{
-      await scanner.start({facingMode:'environment'},{fps:10,qrbox:{width:250,height:250}},decoded=>{
-        localStorage.setItem('scannedQr',decoded);goNext();
-      },()=>{});
-    }catch(e2){}
-  }
+    stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false});
+    const video=document.getElementById('camera');
+    video.srcObject=stream;
+    await video.play().catch(()=>{});
+  }catch(e){}
 }
-window.addEventListener('load',startCamera);
+function stopCamera(){
+  if(stream){stream.getTracks().forEach(track=>track.stop());stream=null;}
+}
+function goNext(){stopCamera();window.location.href='page2.html';}
+window.addEventListener('load',startCamera,{once:true});
+window.addEventListener('pagehide',stopCamera);
 </script>
 </body>
 </html>

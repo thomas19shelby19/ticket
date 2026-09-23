@@ -2,25 +2,36 @@
 <meta name="viewport" content="width=390,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>Оплата проїзду</title>
 <style>
-@font-face{font-family:Comfortaa;src:url('./images/Comfortaa-Regular.ttf') format('truetype');font-weight:400}
-@font-face{font-family:Comfortaa;src:url('./images/Comfortaa-Bold.ttf') format('truetype');font-weight:700}
+@font-face{font-family:Comfortaa;src:url('./images/Comfortaa-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:Comfortaa;src:url('./images/Comfortaa-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;width:390px;min-height:777px;overflow:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%;font-family:Comfortaa,Arial,sans-serif}
-body{background:#B4D5D2;color:#212121}
-.app{position:relative;width:390px;height:777px;margin:0 auto;padding:50px 16px 0;overflow:hidden}
-.card{background:#fff;border-radius:17px;padding:17px;margin-bottom:18px;box-shadow:0 2px 6px rgba(0,0,0,.12)}
-.logo{font-size:20px;font-weight:700;color:#444;margin-bottom:17px}.logo span{color:#4fc54c}.title{font-size:15px;margin-bottom:20px}.dash{border-top:2px dashed #d4d4d4;margin-bottom:18px}.total{display:flex;justify-content:space-between;align-items:center}.label{font-size:15px}.price{font-size:19px;font-weight:700}.pay{width:100%;height:47px;border:0;border-radius:10px;background:#000;color:#fff;font:400 18px Comfortaa;margin-bottom:16px}.pay-image{display:flex;align-items:center;justify-content:center;padding:0}.pay-image img{max-width:58%;max-height:72%;object-fit:contain}.apple{margin-bottom:18px}.or{display:flex;align-items:center;gap:14px;margin-bottom:18px}.line{height:1px;background:#c7c7c7;flex:1}.or span{font-size:15px}
-/* Форма оплати: 70% від попереднього розміру, внутрішні пропорції не змінюються. */
-.form-scale{width:142.857%;margin-left:-21.4285%;transform:scale(.7);transform-origin:top center}
-.form{background:#fff;border-radius:17px;padding:21px 17px;box-shadow:0 2px 6px rgba(0,0,0,.12)}
-.field{display:block;font-size:17px;margin:0 10px 10px}input{width:100%;height:51px;border:0;border-radius:9px;background:#eee;padding:0 12px;font:16px inherit;outline:0;margin-bottom:24px}.card-number{border:1px solid #2774ff;box-shadow:0 0 0 4px rgba(39,116,255,.10)}.two{display:flex;gap:17px}.half{width:50%}
+html,body{margin:0;width:390px;height:777px;overflow:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%;font-family:Comfortaa,Arial,sans-serif}
+body{background:#BAD4D2;color:#212121}
+.app{position:relative;width:390px;height:777px;margin:0 auto;padding:97px 16px 0;overflow:hidden}
+.summary-card{height:154px;margin:0 0 18px;padding:17px;background:#fff;border-radius:17px;box-shadow:0 2px 6px rgba(0,0,0,.12)}
+.logo{font-size:20px;line-height:24px;font-weight:700;color:#444;margin-bottom:17px}.logo span{color:#4fc54c}
+.summary-title{font-size:15px;line-height:20px;margin:0 0 20px}
+.dash{height:2px;border-top:2px dashed #d4d4d4;margin:0 0 18px}
+.total{height:24px;display:flex;justify-content:space-between;align-items:center}
+.label{font-size:15px;line-height:24px}.price{font-size:19px;line-height:24px;font-weight:700}
+.pay{display:flex;align-items:center;justify-content:center;width:358px;height:47px;border:0;border-radius:10px;background:#000;color:#fff;font:400 18px/47px Comfortaa,Arial,sans-serif;margin:0 0 16px;padding:0;cursor:pointer}
+.pay-image img{max-width:58%;max-height:72%;object-fit:contain;display:block}
+.apple{margin-bottom:16px}
+.or{height:20px;display:flex;align-items:center;gap:14px;margin:0 0 18px}
+.line{height:1px;background:#c7c7c7;flex:1}.or span{font-size:15px;line-height:20px}
+.form{width:358px;height:248px;background:#fff;border-radius:17px;padding:17px 12px 0;box-shadow:0 2px 6px rgba(0,0,0,.12);overflow:hidden}
+.field{display:block;font-size:17px;line-height:19px;margin:0 8px}
+input{display:block;width:100%;height:34px;border:0;border-radius:9px;background:#eee;padding:0 12px;font:16px/34px Comfortaa,Arial,sans-serif;outline:0;margin:0 0 19px;color:#212121}
+input::placeholder{color:#9c9c9c;opacity:1}.card-number{border:1px solid #2774ff;box-shadow:0 0 0 4px rgba(39,116,255,.10)}
+.two{display:flex;gap:13px;margin:0}.half{flex:1;min-width:0}.half .field{margin:0}
+.form > input[type="email"]{margin-bottom:0}
 </style><link rel="manifest" href="manifest.json"></head><body><main class="app">
-<section class="card"><div class="logo">LIQPAY <span>»</span></div><div class="title">Оплата проїзду</div><div class="dash"></div><div class="total"><span class="label">До оплати</span><span class="price" id="totalPrice">25.00 UAH</span></div></section>
+<section class="summary-card"><div class="logo">LIQPAY <span>»</span></div><div class="summary-title">Оплата проїзду</div><div class="dash"></div><div class="total"><span class="label">До оплати</span><span class="price" id="totalPrice">25.00 UAH</span></div></section>
 <button class="pay pay-image" onclick="confirmPayment()"><img src="./images/GooglePay.PNG" alt="Google Pay"></button>
 <button class="pay apple pay-image" onclick="confirmPayment()"><img src="./images/applePay.PNG" alt="Apple Pay"></button>
 <div class="or"><div class="line"></div><span>або</span><div class="line"></div></div>
-<div class="form-scale"><section class="form"><label class="field">Номер картки</label><input class="card-number" type="text" inputmode="numeric" autocomplete="cc-number"><div class="two"><div class="half"><label class="field">Термін дії</label><input type="text" placeholder="MM / PP" maxlength="5" autocomplete="cc-exp"></div><div class="half"><label class="field">CVV2 / CVC2</label><input type="password" placeholder="123" maxlength="3" autocomplete="cc-csc"></div></div><label class="field">Email для отримання квитанції</label><input type="email" placeholder="example@domain.com" autocomplete="email"></section></div>
+<section class="form"><label class="field">Номер картки</label><input class="card-number" type="text" inputmode="numeric" autocomplete="cc-number"><div class="two"><div class="half"><label class="field">Термін дії</label><input type="text" placeholder="MM / PP" maxlength="5" autocomplete="cc-exp"></div><div class="half"><label class="field">CVV2 / CVC2</label><input type="password" placeholder="123" maxlength="3" autocomplete="cc-csc"></div></div><label class="field">Email для отримання квитанції</label><input type="email" placeholder="example@domain.com" autocomplete="email"></section>
 </main><script>
 const total=Number(localStorage.getItem('ticketTotal'))||25;document.getElementById('totalPrice').textContent=total.toFixed(2)+' UAH';
-function confirmPayment(){const now=Date.now();localStorage.setItem('paymentTime',String(now));localStorage.setItem('expirationTime',String(now+3600000));sessionStorage.setItem('showPaymentSuccess','1');window.location.href='page4.html'}
+function confirmPayment(){const now=Date.now();localStorage.setItem('paymentTime',String(now));localStorage.setItem('expirationTime',String(now+3600000));window.location.href='page4.html'}
 </script></body></html>

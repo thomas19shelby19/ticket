@@ -42,7 +42,7 @@ body{background:#b4d5d2;color:#212121}
 
 .history{position:absolute;left:16px;top:582px;width:358px;text-align:center;color:#8a9094;font-size:12px;line-height:17px;font-weight:400}
 
-/* Payment confirmation: shown only once immediately after successful payment. */
+/* Payment confirmation: shown for 2 seconds every time page 4 is opened or refreshed. */
 .payment-success{position:absolute;left:0;top:0;width:358px;height:56px;background:#64A33B;border-radius:7px;z-index:30;display:none;color:#fff;align-items:center}
 .payment-success.show{display:flex}
 .payment-success .check{width:28px;height:28px;margin-left:17px;margin-right:12px;border-radius:50%;background:#fff;color:#64A33B;font:700 19px/28px Arial,sans-serif;text-align:center}
@@ -121,15 +121,10 @@ function openModal(){document.getElementById('modalLayer').classList.add('open')
 function closeModal(){document.getElementById('modalLayer').classList.remove('open')}
 function backdropClose(e){if(e.target===document.getElementById('modalLayer'))closeModal()}
 
-/* Only payment.html sets this flag. Refreshing page 4 does not replay the banner. */
-const successFlag=sessionStorage.getItem('showPaymentSuccess');
-if(successFlag==='1'){
-  sessionStorage.removeItem('showPaymentSuccess');
-  const banner=document.getElementById('paymentSuccess');
-  document.getElementById('paymentSuccessText').textContent=(q===1?'1 квиток':q+' квитки')+' за 25 UAH';
-  banner.classList.add('show');
-  setTimeout(()=>banner.classList.remove('show'),2000);
-}
+const banner=document.getElementById('paymentSuccess');
+document.getElementById('paymentSuccessText').textContent=(q===1?'1 квиток':q+' квитки')+' за 25 UAH';
+requestAnimationFrame(()=>banner.classList.add('show'));
+setTimeout(()=>banner.classList.remove('show'),2000);
 </script>
 </body>
 </html>
