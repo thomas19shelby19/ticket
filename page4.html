@@ -25,8 +25,8 @@ body{background:#b4d5d2;color:#212121}
 .mask-date{left:12px;top:365px;width:118px;height:22px}
 .mask-qty{left:286px;top:365px;width:56px;height:22px}
 .mask-timer{left:146px;top:431px;width:67px;height:31px}
-/* Маска перекриває назву компанії на фоні в обох випадках */
-.mask-company{left:61px;top:10px;width:241px;height:38px;display:block}
+/* Перекриття оригінального тексту компанії */
+.mask-company{left:60px;top:14px;width:240px;height:32px;display:block}
 .mask-ride{left:98px;top:438px;width:162px;height:40px;display:none}
 
 /* Динамічні значення */
@@ -36,16 +36,16 @@ body{background:#b4d5d2;color:#212121}
 .qty{left:293px;top:366px;width:50px;font-size:16px;line-height:20px;font-weight:400;text-align:center}
 .timer{left:149px;top:432px;width:60px;font-size:22px;line-height:27px;font-weight:500;color:#64a33b;text-align:center;font-family:'Roboto',sans-serif}
 
-/* Єдиний стиль для обох варіантів дворядкового тексту */
+/* Точне позиціонування та форматування тексту компанії під оригінал */
 .company-bus{
   position:absolute;
-  left:61px;
-  top:10px;
-  width:241px;
+  left:60px;
+  top:14px;
+  width:230px;
   white-space:normal;
   font-family:'Roboto',sans-serif;
-  font-size:13.5px;
-  line-height:15px;
+  font-size:13px;
+  line-height:14px;
   font-weight:400;
   color:#757575;
   letter-spacing:-0.1px;
@@ -117,10 +117,13 @@ const bus=n.length===4;
 document.getElementById('numberOverlay').textContent=n||'006';
 document.getElementById('qtyOverlay').textContent=q;
 
-// Для обох випадків виводимо 2-рядковий текст
+document.getElementById('companyMask').style.display='block';
+document.getElementById('companyBusOverlay').style.display='block';
+
+// Точний розрив рядка як на зразку
 document.getElementById('companyBusOverlay').innerHTML = bus 
-  ? 'КП Вінницька транспортна<br>компанія автобуси' 
-  : 'КП Вінницька транспортна<br>компанія';
+  ? 'КП Вінницька<br>транспортна компанія автобуси' 
+  : 'КП Вінницька<br>транспортна компанія';
 
 document.getElementById('busRidePill').style.display=bus?'flex':'none';
 document.getElementById('rideMask').style.display=bus?'block':'none';
