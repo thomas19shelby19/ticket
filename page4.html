@@ -76,18 +76,17 @@ body{background:#b4d5d2;color:#212121}
 .modal-sheet{position:absolute;left:0;top:82px;width:390px;height:658px;background:#b4d5d2 url('./images/modal_sheet_clean.png') center top/390px 658px no-repeat;border-radius:28px;overflow:hidden}
 .modal-close{position:absolute;left:9px;top:18px;width:55px;height:55px;border:0;background:transparent;padding:0;cursor:pointer;z-index:4}
 
-/* СТИЛІ НИЖНЬОЇ ПАНЕЛІ БРАУЗЕРА (ПІДКОРЕГОВАНІ РОЗМІРИ) */
+/* СТИЛІ НИЖНЬОЇ ПАНЕЛІ (ПІДНЯТО ТА ЗМЕНШЕНО ШИРИНУ) */
 .browser-bar {
   position: absolute;
-  bottom: 12px;
-  left: 10px;
-  width: 370px;
+  bottom: 18px; /* Піднято вище */
+  left: 16px;
+  width: 358px;
   height: 42px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   z-index: 50;
-  padding: 0 4px;
 }
 
 .browser-btn-back, .browser-btn-more {
@@ -106,7 +105,7 @@ body{background:#b4d5d2;color:#212121}
 }
 
 .browser-url-pill {
-  width: 266px;
+  width: 242px; /* Коротша адресна стрічка */
   height: 42px;
   border-radius: 21px;
   background: rgba(255, 255, 255, 0.22);
@@ -116,7 +115,7 @@ body{background:#b4d5d2;color:#212121}
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 12px 0 14px;
+  padding: 0 10px 0 12px;
   color: #ffffff;
   font-family: 'Roboto', sans-serif;
 }
@@ -124,7 +123,7 @@ body{background:#b4d5d2;color:#212121}
 .url-left {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex: 1;
   overflow: hidden;
 }
@@ -135,7 +134,7 @@ body{background:#b4d5d2;color:#212121}
   background: transparent;
   border: none;
   outline: none;
-  font-size: 15px;
+  font-size: 14.5px;
   font-weight: 400;
   color: #ffffff;
   font-family: 'Roboto', sans-serif;
@@ -154,7 +153,7 @@ body{background:#b4d5d2;color:#212121}
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 6px;
+  margin-left: 4px;
   flex-shrink: 0;
 }
 
