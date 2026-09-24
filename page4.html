@@ -30,32 +30,15 @@ body{background:#b4d5d2;color:#212121}
 .mask{position:absolute;background:#fff;z-index:3;pointer-events:none}
 .mask-series{left:210px;top:60px;width:135px;height:22px}
 .mask-number{left:240px;top:88px;width:105px;height:30px}
-.mask-date{left:12px;top:360px;width:125px;height:28px}
-.mask-price{left:155px;top:360px;width:60px;height:28px}
-.mask-qty{left:280px;top:360px;width:60px;height:28px}
+.mask-date{left:12px;top:360px;width:125px;height:25px}
+.mask-price{left:155px;top:360px;width:50px;height:25px}
+.mask-qty{left:280px;top:360px;width:60px;height:25px}
 .mask-timer-title{left:20px;top:408px;width:318px;height:22px}
 .mask-timer{left:100px;top:432px;width:158px;height:36px}
 .mask-company{left:60px;top:14px;width:240px;height:40px;display:block}
 
 /* Динамічні елементи */
 .dynamic{position:absolute;z-index:4;background:transparent;color:#212121;white-space:nowrap;margin:0;padding:0;font-family:'e-Ukraine','Roboto',sans-serif}
-
-/* Назва перевізника (зменшено розмір і жирність) */
-.company-bus {
-  position: absolute;
-  left: 60px;
-  top: 15px;
-  width: 230px;
-  white-space: normal;
-  font-family: 'e-Ukraine','Roboto',sans-serif;
-  font-size: 12px !important;
-  line-height: 15px;
-  font-weight: 300;
-  color: #6c726d;
-  letter-spacing: -0.1px;
-  text-align: left;
-  display: block;
-}
 
 /* Серія квитка */
 .series{
@@ -83,33 +66,33 @@ body{background:#b4d5d2;color:#212121}
   color: #000;
 }
 
-/* Дата, Сума, Квитки (вирівняні по єдиній лінії та однакового розміру з заголовками) */
-.date {
+/* Дата, Сума, Квитки (зменшено на 2px — з 15px до 13px, суму і кількість вирівняно по top: 366px) */
+.date{
   left: 16px;
-  top: 365px;
-  font-size: 13.5px;
-  line-height: 18px;
+  top: 366px;
+  font-size: 13px;
+  line-height: 20px;
   font-weight: 700;
   color: #000;
 }
 
-.price {
-  left: 172px;
-  top: 365px;
-  width: 50px;
-  font-size: 13.5px;
-  line-height: 18px;
+.price{
+  left: 160px;
+  top: 366px;
+  width: 40px;
+  font-size: 13px;
+  line-height: 20px;
   font-weight: 700;
   text-align: center;
   color: #000;
 }
 
-.qty {
-  left: 288px;
-  top: 365px;
+.qty{
+  left: 290px;
+  top: 366px;
   width: 50px;
-  font-size: 13.5px;
-  line-height: 18px;
+  font-size: 13px;
+  line-height: 20px;
   font-weight: 700;
   text-align: center;
   color: #000;
@@ -138,6 +121,23 @@ body{background:#b4d5d2;color:#212121}
   color: #57962c;
   text-align: center;
   letter-spacing: 0.5px;
+}
+
+/* Назва перевізника */
+.company-bus{
+  position: absolute;
+  left: 60px;
+  top: 15px;
+  width: 230px;
+  white-space: normal;
+  font-family: 'e-Ukraine','Roboto',sans-serif;
+  font-size: 12px !important;
+  line-height: 15px;
+  font-weight: 300;
+  color: #6c726d;
+  letter-spacing: -0.1px;
+  text-align: left;
+  display: block;
 }
 
 /* Нижній зелений елемент «Квиток Проїзд» */
@@ -221,7 +221,6 @@ body{background:#b4d5d2;color:#212121}
     <img id="ticketBg" class="ticket-bg" src="images/ticket_closed.png" alt="Квиток">
 
     <!-- Білі маски -->
-    <div class="mask mask-company" id="companyMask"></div>
     <div class="mask mask-series"></div>
     <div class="mask mask-number"></div>
     <div class="mask mask-date"></div>
@@ -229,6 +228,7 @@ body{background:#b4d5d2;color:#212121}
     <div class="mask mask-qty"></div>
     <div class="mask mask-timer-title"></div>
     <div class="mask mask-timer"></div>
+    <div class="mask mask-company" id="companyMask"></div>
 
     <!-- Клікабельні зони -->
     <button class="hit-info" onclick="openModal()" aria-label="Додаткові дані"></button>
@@ -237,13 +237,13 @@ body{background:#b4d5d2;color:#212121}
     <!-- Динамічний вміст -->
     <div class="dynamic company-bus" id="companyBusOverlay">КП Вінницька<br>транспортна компанія</div>
     <div class="dynamic series" id="seriesOverlay">PB №999075941</div>
-    <div class="dynamic number" id="numberOverlay">255</div>
-    <div class="dynamic date" id="dateOverlay">24 вер. 23:51</div>
-    <div class="dynamic price" id="priceOverlay">25</div>
+    <div class="dynamic number" id="numberOverlay">372</div>
+    <div class="dynamic date" id="dateOverlay">07 квіт. 11:53</div>
+    <div class="dynamic price" id="priceOverlay">12</div>
     <div class="dynamic qty" id="qtyOverlay">1</div>
     
     <div class="dynamic timer-title">Квиток разового використання</div>
-    <div class="dynamic timer" id="timerOverlay">54:03</div>
+    <div class="dynamic timer" id="timerOverlay">59:22</div>
 
     <div class="bus-ride-pill" id="busRidePill"><span class="label">Квиток</span><span class="value">Проїзд</span></div>
   </section>
@@ -258,18 +258,15 @@ body{background:#b4d5d2;color:#212121}
 </div>
 
 <script>
-// Налаштування значень з localStorage
-const companyName = localStorage.getItem('companyName') || 'КП Вінницька<br>транспортна компанія';
-const series = localStorage.getItem('ticketSeries') || 'PB №201551395';
-const n = (localStorage.getItem('transportNumber') || '255').replace(/\D/g, '');
-const pricePerTicket = Number(localStorage.getItem('ticketPrice')) || 25;
+// Отримання значень з localStorage або використання стандартних значень
+const series = localStorage.getItem('ticketSeries') || 'PB №999075941';
+const n = (localStorage.getItem('transportNumber') || '372').replace(/\D/g, '');
 const q = Math.max(1, Number(localStorage.getItem('ticketQuantity')) || 1);
 
-document.getElementById('companyBusOverlay').innerHTML = companyName;
 document.getElementById('seriesOverlay').textContent = series;
-document.getElementById('numberOverlay').textContent = n || '255';
+document.getElementById('numberOverlay').textContent = n || '372';
 document.getElementById('qtyOverlay').textContent = q;
-document.getElementById('priceOverlay').textContent = pricePerTicket * q;
+document.getElementById('priceOverlay').textContent = 12 * q;
 
 let paymentTime = Number(localStorage.getItem('paymentTime'));
 let expirationTime = Number(localStorage.getItem('expirationTime'));
@@ -309,7 +306,7 @@ function closeModal() { document.getElementById('modalLayer').classList.remove('
 function backdropClose(e) { if (e.target === document.getElementById('modalLayer')) closeModal(); }
 
 const banner = document.getElementById('paymentSuccess');
-const total = q * pricePerTicket;
+const total = q * 12;
 function ticketWord(n) { const r = n % 100; return (r >= 11 && r <= 14) ? 'квитків' : (n % 10 === 1 ? 'квиток' : (n % 10 >= 2 && n % 10 <= 4 ? 'квитки' : 'квитків')); }
 document.getElementById('paymentSuccessText').textContent = q + ' ' + ticketWord(q) + ' за ' + total + ' UAH';
 requestAnimationFrame(() => banner.classList.add('show'));
