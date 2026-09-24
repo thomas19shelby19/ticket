@@ -5,11 +5,15 @@
 <meta name="viewport" content="width=390, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#b4d5d2">
 <title>Квиток</title>
+
+<!-- Підключення шрифту Roboto -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
 <style>
-@font-face{font-family:Comfortaa;src:url('./images/Comfortaa-Regular.ttf') format('truetype');font-weight:400;font-display:block}
-@font-face{font-family:Comfortaa;src:url('./images/Comfortaa-Bold.ttf') format('truetype');font-weight:700;font-display:block}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;width:390px;height:777px;overflow:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%;font-family:Comfortaa,Arial,sans-serif}
+html,body{margin:0;width:390px;height:777px;overflow:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%;font-family:'Roboto',sans-serif}
 body{background:#b4d5d2;color:#212121}
 .page{position:relative;width:390px;height:777px;margin:0;padding-top:12px;overflow:hidden}
 .ticket-wrap{position:relative;width:358px;height:514px;margin-left:16px;overflow:hidden}
@@ -25,22 +29,22 @@ body{background:#b4d5d2;color:#212121}
 .mask-ride{left:98px;top:438px;width:162px;height:40px;display:none}
 
 /* Динамічні значення */
-.dynamic{position:absolute;z-index:4;background:transparent;color:#212121;white-space:nowrap;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.dynamic{position:absolute;z-index:4;background:transparent;color:#212121;white-space:nowrap;margin:0;padding:0;font-family:'Roboto',sans-serif}
 .number{left:292px;top:97px;width:50px;font-size:21px;line-height:25px;font-weight:400;text-align:right}
 .date{left:16px;top:366px;font-size:16px;line-height:20px;font-weight:400}
 .qty{left:293px;top:366px;width:50px;font-size:16px;line-height:20px;font-weight:400;text-align:center}
-.timer{left:149px;top:432px;width:60px;font-size:22px;line-height:27px;font-weight:400;color:#64a33b;text-align:center;font-family:Comfortaa,Arial,sans-serif}
+.timer{left:149px;top:432px;width:60px;font-size:22px;line-height:27px;font-weight:500;color:#64a33b;text-align:center;font-family:'Roboto',sans-serif}
 
 /* Позиціонування 2-рядкового тексту для автобуса */
 .company-bus{
   position:absolute;
   left:61px;
-  top:12px;
+  top:10px;
   width:230px;
   white-space:normal;
-  font-family:-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  font-family:'Roboto',sans-serif;
   font-size:13.5px;
-  line-height:16px;
+  line-height:15px;
   font-weight:400;
   color:#757575;
   letter-spacing:-0.1px;
@@ -48,7 +52,7 @@ body{background:#b4d5d2;color:#212121}
   display:none;
 }
 
-.bus-ride-pill{position:absolute;left:101px;top:473px;width:156px;height:24px;border-radius:6px;background:#dfecd5;z-index:5;display:none;align-items:center;justify-content:center;gap:3px;font-family:Comfortaa,Arial,sans-serif;font-size:10.5px;line-height:24px;font-weight:400;white-space:nowrap}
+.bus-ride-pill{position:absolute;left:101px;top:473px;width:156px;height:24px;border-radius:6px;background:#dfecd5;z-index:5;display:none;align-items:center;justify-content:center;gap:3px;font-family:'Roboto',sans-serif;font-size:10.5px;line-height:24px;font-weight:400;white-space:nowrap}
 .bus-ride-pill .label{color:#6c726d}.bus-ride-pill .value{color:#64a33b}
 
 .hit-info,.hit-qr{position:absolute;border:0;background:transparent;padding:0;cursor:pointer;z-index:8;-webkit-appearance:none;appearance:none;touch-action:manipulation}
@@ -59,10 +63,10 @@ body{background:#b4d5d2;color:#212121}
 
 .payment-success{position:absolute;left:0;top:0;width:358px;height:54px;background:#64A33B;border-radius:6px;z-index:30;display:none;color:#fff}
 .payment-success.show{display:block}
-.payment-success .check{position:absolute;left:25px;top:17px;width:20px;height:20px;margin:0;border-radius:50%;background:#fff;color:#64A33B;font:700 14px/20px Arial,sans-serif;text-align:center}
+.payment-success .check{position:absolute;left:25px;top:17px;width:20px;height:20px;margin:0;border-radius:50%;background:#fff;color:#64A33B;font:700 14px/20px 'Roboto',sans-serif;text-align:center}
 .payment-success .copy{position:absolute;left:60px;top:7px;display:block;line-height:1.1}
-.payment-success .title{display:block;font:400 12px/18px Comfortaa,Arial,sans-serif;margin:0}
-.payment-success .sub{display:block;font:400 12px/18px Comfortaa,Arial,sans-serif;margin:0}
+.payment-success .title{display:block;font:400 12px/18px 'Roboto',sans-serif;margin:0}
+.payment-success .sub{display:block;font:400 12px/18px 'Roboto',sans-serif;margin:0}
 
 .modal-layer{position:fixed;left:0;top:0;width:100vw;height:calc(100vh + 80px);min-height:100vh;z-index:100;display:none;background:rgba(0,0,0,.62)}
 .modal-layer.open{display:block}
