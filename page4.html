@@ -33,6 +33,10 @@ body{background:#b4d5d2;color:#212121}
 .dynamic{position:absolute;z-index:4;background:transparent;color:#212121;white-space:nowrap;margin:0;padding:0;font-family:'Roboto',sans-serif}
 .number{left:292px;top:97px;width:50px;font-size:21px;line-height:25px;font-weight:600;text-align:right}
 .date{left:16px;top:366px;font-size:16px;line-height:20px;font-weight:400}
+
+/* Сума вирівняна суворо по рівню дати */
+.price{left:155px;top:367px;width:50px;font-size:16px;line-height:20px;font-weight:400;text-align:center}
+
 .qty{left:293px;top:366px;width:50px;font-size:16px;line-height:20px;font-weight:400;text-align:center}
 .timer{left:149px;top:432px;width:60px;font-size:22px;line-height:27px;font-weight:500;color:#64a33b;text-align:center;font-family:'Roboto',sans-serif}
 
@@ -94,6 +98,7 @@ body{background:#b4d5d2;color:#212121}
 
     <div class="dynamic number" id="numberOverlay"></div>
     <div class="dynamic date" id="dateOverlay"></div>
+    <div class="dynamic price" id="priceOverlay"></div>
     <div class="dynamic qty" id="qtyOverlay"></div>
     <div class="dynamic timer" id="timerOverlay"></div>
     <div class="dynamic company-bus" id="companyBusOverlay"></div>
@@ -116,6 +121,7 @@ const bus=n.length===4;
 
 document.getElementById('numberOverlay').textContent=n||'006';
 document.getElementById('qtyOverlay').textContent=q;
+document.getElementById('priceOverlay').textContent=q*25;
 
 document.getElementById('companyMask').style.display='block';
 document.getElementById('companyBusOverlay').style.display='block';
