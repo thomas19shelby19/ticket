@@ -76,45 +76,47 @@ body{background:#b4d5d2;color:#212121}
 .modal-sheet{position:absolute;left:0;top:82px;width:390px;height:658px;background:#b4d5d2 url('./images/modal_sheet_clean.png') center top/390px 658px no-repeat;border-radius:28px;overflow:hidden}
 .modal-close{position:absolute;left:9px;top:18px;width:55px;height:55px;border:0;background:transparent;padding:0;cursor:pointer;z-index:4}
 
-/* СТИЛІ НИЖНЬОЇ ПАНЕЛІ БРАУЗЕРА */
+/* СТИЛІ НИЖНЬОЇ ПАНЕЛІ БРАУЗЕРА (ПІДКОРЕГОВАНІ РОЗМІРИ) */
 .browser-bar {
   position: absolute;
   bottom: 12px;
-  left: 12px;
-  width: 366px;
-  height: 48px;
+  left: 10px;
+  width: 370px;
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   z-index: 50;
+  padding: 0 4px;
 }
 
 .browser-btn-back, .browser-btn-more {
-  width: 46px;
-  height: 46px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .browser-url-pill {
-  width: 254px;
-  height: 46px;
-  border-radius: 23px;
-  background: rgba(255, 255, 255, 0.25);
+  width: 266px;
+  height: 42px;
+  border-radius: 21px;
+  background: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 16px;
+  padding: 0 12px 0 14px;
   color: #ffffff;
   font-family: 'Roboto', sans-serif;
 }
@@ -123,14 +125,25 @@ body{background:#b4d5d2;color:#212121}
   display: flex;
   align-items: center;
   gap: 8px;
+  flex: 1;
   overflow: hidden;
 }
 
-.url-text {
+/* Поле вводу адреси */
+.url-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
   font-size: 15px;
   font-weight: 400;
   color: #ffffff;
-  white-space: nowrap;
+  font-family: 'Roboto', sans-serif;
+  padding: 0;
+}
+
+.url-input::selection {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .reload-btn {
@@ -141,6 +154,8 @@ body{background:#b4d5d2;color:#212121}
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 6px;
+  flex-shrink: 0;
 }
 
 .browser-icon {
@@ -180,37 +195,37 @@ body{background:#b4d5d2;color:#212121}
 
   <!-- НИЖНЯ ПАНЕЛЬ (ADDRESS BAR) -->
   <div class="browser-bar">
-    <!-- Кнопка назад на 3-ю сторінку -->
+    <!-- Кнопка назад -->
     <div class="browser-btn-back" onclick="goBack()" aria-label="Назад">
-      <svg class="browser-icon" width="12" height="20" viewBox="0 0 12 20" stroke-width="2.5">
+      <svg class="browser-icon" width="10" height="18" viewBox="0 0 12 20" stroke-width="2.5">
         <path d="M10 2L2 10L10 18"/>
       </svg>
     </div>
 
-    <!-- Адресний рядок -->
+    <!-- Адресний рядок із можливістю введення -->
     <div class="browser-url-pill">
       <div class="url-left">
-        <!-- Іконка "карти / картки" -->
-        <svg class="browser-icon" width="18" height="18" viewBox="0 0 24 24" stroke-width="2">
+        <!-- Іконка "платіжна картка / браузер" -->
+        <svg class="browser-icon" width="16" height="16" viewBox="0 0 24 24" stroke-width="2">
           <rect x="2" y="5" width="20" height="14" rx="2"/>
           <line x1="2" y1="10" x2="22" y2="10"/>
         </svg>
-        <span class="url-text">irc.privatbank.ua</span>
+        <input type="text" class="url-input" id="urlInput" value="irc.privatbank.ua" onkeydown="handleUrlKey(event)">
       </div>
-      <!-- Кнопка перезавантаження -->
+      <!-- Кнопка оновлення -->
       <button class="reload-btn" onclick="reloadPage()" aria-label="Перезавантажити">
-        <svg class="browser-icon" width="18" height="18" viewBox="0 0 24 24" stroke-width="2.5">
+        <svg class="browser-icon" width="16" height="16" viewBox="0 0 24 24" stroke-width="2.5">
           <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
         </svg>
       </button>
     </div>
 
-    <!-- Три крапки (поки без дії) -->
+    <!-- Три крапки -->
     <div class="browser-btn-more">
-      <svg width="20" height="6" viewBox="0 0 20 6" fill="#ffffff">
-        <circle cx="3" cy="3" r="2.5"/>
-        <circle cx="10" cy="3" r="2.5"/>
-        <circle cx="17" cy="3" r="2.5"/>
+      <svg width="18" height="5" viewBox="0 0 20 6" fill="#ffffff">
+        <circle cx="3" cy="3" r="2.2"/>
+        <circle cx="10" cy="3" r="2.2"/>
+        <circle cx="17" cy="3" r="2.2"/>
       </svg>
     </div>
   </div>
@@ -265,18 +280,29 @@ document.getElementById('paymentSuccessText').textContent=q+' '+ticketWord(q)+' 
 requestAnimationFrame(()=>banner.classList.add('show'));
 setTimeout(()=>banner.classList.remove('show'),2000);
 
-// ФУНКЦІЇ ДЛЯ НИЖНЬОЇ ПАНЕЛІ
+// НАВІГАЦІЯ ТА АДРЕСНИЙ РЯДОК
 function goBack() {
-  // Якщо є історія переходів — повертаємося назад, інакше відкриваємо page3.html
   if (document.referrer) {
     window.history.back();
   } else {
-    window.location.href = 'page3.html'; // Вкажіть тут точну назву/файл вашої 3-ї сторінки
+    window.location.href = 'page3.html';
   }
 }
 
 function reloadPage() {
   window.location.reload();
+}
+
+function handleUrlKey(e) {
+  if (e.key === 'Enter') {
+    let url = e.target.value.trim();
+    if (url) {
+      if (!url.startsWith('http://') && !url.startsWith('https://')) {
+        url = 'https://' + url;
+      }
+      window.location.href = url;
+    }
+  }
 }
 </script>
 </body>
