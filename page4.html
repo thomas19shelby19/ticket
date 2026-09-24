@@ -9,198 +9,66 @@
 <!-- Підключення шрифту Roboto -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-@font-face {
-  font-family: 'e-Ukraine';
-  src: url('https://db.onlinewebfonts.com/t/a44207bfe4040f536c824dbbf82f5ed1.woff2') format('woff2');
-  font-weight: 300 400 700;
-  font-style: normal;
-}
-
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;width:390px;height:777px;overflow:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%;font-family:'e-Ukraine','Roboto',sans-serif}
+html,body{margin:0;width:390px;height:777px;overflow:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%;font-family:'Roboto',sans-serif}
 body{background:#b4d5d2;color:#212121}
 .page{position:relative;width:390px;height:777px;margin:0;padding-top:12px;overflow:hidden}
-.ticket-wrap{position:relative;width:358px;height:514px;margin-left:16px;overflow:hidden;background:#fff;border-radius:16px}
+.ticket-wrap{position:relative;width:358px;height:514px;margin-left:16px;overflow:hidden}
 .ticket-bg{position:absolute;left:0;top:0;width:358px;height:514px;display:block}
 
-/* Білі маски для перекриття оригінального тексту шаблону */
+/* Геометрія масок */
 .mask{position:absolute;background:#fff;z-index:3;pointer-events:none}
-.mask-series{left:210px;top:60px;width:135px;height:22px}
-.mask-number{left:240px;top:88px;width:105px;height:30px}
-.mask-date{left:12px;top:360px;width:125px;height:25px}
-.mask-price{left:155px;top:360px;width:50px;height:25px}
-.mask-qty{left:280px;top:360px;width:60px;height:25px}
-.mask-timer-title{left:20px;top:408px;width:318px;height:22px}
-.mask-timer{left:100px;top:432px;width:158px;height:36px}
-.mask-company{left:60px;top:14px;width:240px;height:40px;display:block}
+.mask-number{left:288px;top:96px;width:54px;height:23px}
+.mask-date{left:12px;top:365px;width:118px;height:22px}
+.mask-qty{left:286px;top:365px;width:56px;height:22px}
+.mask-timer{left:146px;top:431px;width:67px;height:31px}
+/* Перекриття оригінального тексту компанії */
+.mask-company{left:60px;top:14px;width:240px;height:38px;display:block}
+.mask-ride{left:98px;top:438px;width:162px;height:40px;display:none}
 
-/* Динамічні елементи */
-.dynamic{position:absolute;z-index:4;background:transparent;color:#212121;white-space:nowrap;margin:0;padding:0;font-family:'e-Ukraine','Roboto',sans-serif}
+/* Динамічні значення */
+.dynamic{position:absolute;z-index:4;background:transparent;color:#212121;white-space:nowrap;margin:0;padding:0;font-family:'Roboto',sans-serif}
+.number{left:292px;top:97px;width:50px;font-size:21px;line-height:25px;font-weight:600;text-align:right}
+.date{left:16px;top:366px;font-size:16px;line-height:20px;font-weight:400}
+.qty{left:293px;top:366px;width:50px;font-size:16px;line-height:20px;font-weight:400;text-align:center}
+.timer{left:149px;top:432px;width:60px;font-size:22px;line-height:27px;font-weight:500;color:#64a33b;text-align:center;font-family:'Roboto',sans-serif}
 
-/* Серія квитка */
-.series{
-  left: 180px;
-  top: 61px;
-  width: 162px;
-  font-size: 15px;
-  line-height: 20px;
-  font-weight: 500;
-  text-align: right;
-  color: #6c726d;
-  letter-spacing: -0.2px;
-}
-
-/* Бортовий номер */
-.number{
-  left: 240px;
-  top: 90px;
-  width: 102px;
-  font-size: 25px;
-  line-height: 28px;
-  font-weight: 700;
-  text-align: right;
-  letter-spacing: -0.5px;
-  color: #000;
-}
-
-/* Дата, Сума, Квитки (зменшено на 2px — з 15px до 13px, суму і кількість вирівняно по top: 366px) */
-.date{
-  left: 16px;
-  top: 366px;
-  font-size: 13px;
-  line-height: 20px;
-  font-weight: 700;
-  color: #000;
-}
-
-.price{
-  left: 160px;
-  top: 366px;
-  width: 40px;
-  font-size: 13px;
-  line-height: 20px;
-  font-weight: 700;
-  text-align: center;
-  color: #000;
-}
-
-.qty{
-  left: 290px;
-  top: 366px;
-  width: 50px;
-  font-size: 13px;
-  line-height: 20px;
-  font-weight: 700;
-  text-align: center;
-  color: #000;
-}
-
-/* Заголовок таймера */
-.timer-title{
-  left: 0;
-  top: 412px;
-  width: 358px;
-  text-align: center;
-  font-size: 15px;
-  line-height: 19px;
-  font-weight: 500;
-  color: #1a1a1a;
-}
-
-/* Таймер */
-.timer{
-  left: 0;
-  top: 436px;
-  width: 358px;
-  font-size: 27px;
-  line-height: 32px;
-  font-weight: 600;
-  color: #57962c;
-  text-align: center;
-  letter-spacing: 0.5px;
-}
-
-/* Назва перевізника */
+/* Збільшено лише font-size */
 .company-bus{
-  position: absolute;
-  left: 60px;
-  top: 15px;
-  width: 230px;
-  white-space: normal;
-  font-family: 'e-Ukraine','Roboto',sans-serif;
-  font-size: 12px !important;
-  line-height: 15px;
-  font-weight: 300;
-  color: #6c726d;
-  letter-spacing: -0.1px;
-  text-align: left;
-  display: block;
+  position:absolute;
+  left:60px;
+  top:14px;
+  width:230px;
+  white-space:normal;
+  font-family:'Roboto',sans-serif;
+  font-size:15px !important;
+  line-height:20px;
+  font-weight:400;
+  color:#757575;
+  letter-spacing:-0.1px;
+  text-align:left;
+  display:block;
 }
 
-/* Нижній зелений елемент «Квиток Проїзд» */
-.bus-ride-pill{
-  position: absolute;
-  left: 122px;
-  top: 476px;
-  width: 114px;
-  height: 25px;
-  border-radius: 6px;
-  background: #edf5e8;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  font-family: 'e-Ukraine', 'Roboto', sans-serif;
-  font-size: 12px;
-  line-height: 25px;
-  white-space: nowrap;
-}
-.bus-ride-pill .label { color: #757575; font-weight: 400; }
-.bus-ride-pill .value { color: #57962c; font-weight: 600; }
+.bus-ride-pill{position:absolute;left:101px;top:473px;width:156px;height:24px;border-radius:6px;background:#dfecd5;z-index:5;display:none;align-items:center;justify-content:center;gap:3px;font-family:'Roboto',sans-serif;font-size:10.5px;line-height:24px;font-weight:400;white-space:nowrap}
+.bus-ride-pill .label{color:#6c726d}.bus-ride-pill .value{color:#64a33b}
 
-/* Інтерактивні зони */
 .hit-info,.hit-qr{position:absolute;border:0;background:transparent;padding:0;cursor:pointer;z-index:8;-webkit-appearance:none;appearance:none;touch-action:manipulation}
 .hit-info{left:307px;top:17px;width:34px;height:34px}
 .hit-qr{left:72px;top:150px;width:214px;height:170px}
 
-/* Текст під квитком */
 .history{position:absolute;left:16px;top:535px;width:358px;text-align:center;color:#8a9094;font-size:10px;line-height:14px;font-weight:400}
 
-/* Повідомлення про успішну оплату */
-.payment-success{
-  position:absolute;
-  left:0;
-  top:0;
-  width:358px;
-  height:58px;
-  background:#57962c;
-  border-radius:10px;
-  z-index:30;
-  display:none;
-  color:#fff;
-  padding:10px 16px;
-}
-.payment-success.show{display:flex;align-items:center}
-.payment-success .check{
-  width:22px;
-  height:22px;
-  border-radius:50%;
-  background:#fff;
-  color:#57962c;
-  font:700 13px/22px 'e-Ukraine','Roboto',sans-serif;
-  text-align:center;
-  margin-right:12px;
-  flex-shrink:0;
-}
-.payment-success .copy{display:flex;flex-direction:column;justify-content:center}
-.payment-success .title{font:500 13px/16px 'e-Ukraine','Roboto',sans-serif;margin:0}
-.payment-success .sub{font:400 12px/15px 'e-Ukraine','Roboto',sans-serif;margin-top:2px;opacity:0.95}
+.payment-success{position:absolute;left:0;top:0;width:358px;height:54px;background:#64A33B;border-radius:6px;z-index:30;display:none;color:#fff}
+.payment-success.show{display:block}
+.payment-success .check{position:absolute;left:25px;top:17px;width:20px;height:20px;margin:0;border-radius:50%;background:#fff;color:#64A33B;font:700 14px/20px 'Roboto',sans-serif;text-align:center}
+.payment-success .copy{position:absolute;left:60px;top:7px;display:block;line-height:1.1}
+.payment-success .title{display:block;font:400 12px/18px 'Roboto',sans-serif;margin:0}
+.payment-success .sub{display:block;font:400 12px/18px 'Roboto',sans-serif;margin:0}
 
-/* Модальне вікно */
 .modal-layer{position:fixed;left:0;top:0;width:100vw;height:calc(100vh + 80px);min-height:100vh;z-index:100;display:none;background:rgba(0,0,0,.62)}
 .modal-layer.open{display:block}
 .modal-sheet{position:absolute;left:0;top:82px;width:390px;height:658px;background:#b4d5d2 url('./images/modal_sheet_clean.png') center top/390px 658px no-repeat;border-radius:28px;overflow:hidden}
@@ -211,43 +79,27 @@ body{background:#b4d5d2;color:#212121}
 <body>
 <main class="page">
   <section class="ticket-wrap" id="ticketWrap">
-    <div class="payment-success" id="paymentSuccess">
-      <span class="check">✓</span>
-      <span class="copy">
-        <span class="title">Оплата успішна</span>
-        <span class="sub" id="paymentSuccessText">1 квиток за 12 UAH</span>
-      </span>
-    </div>
+    <div class="payment-success" id="paymentSuccess"><span class="check">✓</span><span class="copy"><span class="title">Оплата успішна</span><span class="sub" id="paymentSuccessText">1 квиток за 25 UAH</span></span></div>
     <img id="ticketBg" class="ticket-bg" src="images/ticket_closed.png" alt="Квиток">
 
-    <!-- Білі маски -->
-    <div class="mask mask-series"></div>
     <div class="mask mask-number"></div>
     <div class="mask mask-date"></div>
-    <div class="mask mask-price"></div>
     <div class="mask mask-qty"></div>
-    <div class="mask mask-timer-title"></div>
     <div class="mask mask-timer"></div>
     <div class="mask mask-company" id="companyMask"></div>
+    <div class="mask mask-ride" id="rideMask"></div>
 
-    <!-- Клікабельні зони -->
     <button class="hit-info" onclick="openModal()" aria-label="Додаткові дані"></button>
     <button class="hit-qr" id="qrHit" onclick="toggleQR()" aria-label="Переглянути QR"></button>
 
-    <!-- Динамічний вміст -->
-    <div class="dynamic company-bus" id="companyBusOverlay">КП Вінницька<br>транспортна компанія</div>
-    <div class="dynamic series" id="seriesOverlay">PB №999075941</div>
-    <div class="dynamic number" id="numberOverlay">372</div>
-    <div class="dynamic date" id="dateOverlay">07 квіт. 11:53</div>
-    <div class="dynamic price" id="priceOverlay">12</div>
-    <div class="dynamic qty" id="qtyOverlay">1</div>
-    
-    <div class="dynamic timer-title">Квиток разового використання</div>
-    <div class="dynamic timer" id="timerOverlay">59:22</div>
+    <div class="dynamic number" id="numberOverlay"></div>
+    <div class="dynamic date" id="dateOverlay"></div>
+    <div class="dynamic qty" id="qtyOverlay"></div>
+    <div class="dynamic timer" id="timerOverlay"></div>
+    <div class="dynamic company-bus" id="companyBusOverlay"></div>
 
-    <div class="bus-ride-pill" id="busRidePill"><span class="label">Квиток</span><span class="value">Проїзд</span></div>
+    <div class="bus-ride-pill" id="busRidePill"><span class="label">Квиток</span><span class="value">Проїзд(Автобус)</span></div>
   </section>
-
   <div class="history">Ви зможете заново відкрити цю сторінку<br>через історію браузера</div>
 </main>
 
@@ -258,59 +110,47 @@ body{background:#b4d5d2;color:#212121}
 </div>
 
 <script>
-// Отримання значень з localStorage або використання стандартних значень
-const series = localStorage.getItem('ticketSeries') || 'PB №999075941';
-const n = (localStorage.getItem('transportNumber') || '372').replace(/\D/g, '');
-const q = Math.max(1, Number(localStorage.getItem('ticketQuantity')) || 1);
+const n=(localStorage.getItem('transportNumber')||'006').replace(/\D/g,'');
+const q=Math.max(1,Number(localStorage.getItem('ticketQuantity'))||1);
+const bus=n.length===4;
 
-document.getElementById('seriesOverlay').textContent = series;
-document.getElementById('numberOverlay').textContent = n || '372';
-document.getElementById('qtyOverlay').textContent = q;
-document.getElementById('priceOverlay').textContent = 12 * q;
+document.getElementById('numberOverlay').textContent=n||'006';
+document.getElementById('qtyOverlay').textContent=q;
 
-let paymentTime = Number(localStorage.getItem('paymentTime'));
-let expirationTime = Number(localStorage.getItem('expirationTime'));
-if (!paymentTime) { paymentTime = Date.now(); localStorage.setItem('paymentTime', String(paymentTime)); }
-if (!expirationTime || expirationTime <= paymentTime) { expirationTime = paymentTime + 3600000; localStorage.setItem('expirationTime', String(expirationTime)); }
+document.getElementById('companyMask').style.display='block';
+document.getElementById('companyBusOverlay').style.display='block';
 
-const months = ['січ.','лют.','бер.','квіт.','трав.','черв.','лип.','серп.','вер.','жовт.','лист.','груд.'];
-function formatDate(ts) {
-  const d = new Date(ts);
-  const day = String(d.getDate()).padStart(2, '0');
-  const month = months[d.getMonth()];
-  const hours = String(d.getHours()).padStart(2, '0');
-  const minutes = String(d.getMinutes()).padStart(2, '0');
-  return `${day} ${month} ${hours}:${minutes}`;
-}
-document.getElementById('dateOverlay').textContent = formatDate(paymentTime);
+document.getElementById('companyBusOverlay').innerHTML = bus 
+  ? 'КП Вінницька транспортна<br>компанія автобуси' 
+  : 'КП Вінницька<br>транспортна компанія';
 
-function tick() {
-  const left = Math.max(0, expirationTime - Date.now());
-  const sec = Math.floor(left / 1000);
-  const mm = Math.floor(sec / 60), ss = sec % 60;
-  document.getElementById('timerOverlay').textContent = String(mm).padStart(2, '0') + ':' + String(ss).padStart(2, '0');
-  if (left <= 0) clearInterval(timerId);
-}
-const timerId = setInterval(tick, 250);
-tick();
+document.getElementById('busRidePill').style.display=bus?'flex':'none';
+document.getElementById('rideMask').style.display=bus?'block':'none';
 
-let qrOpen = false;
-function toggleQR() {
-  qrOpen = !qrOpen;
-  document.getElementById('ticketBg').src = qrOpen ? 'images/ticket_open.png' : 'images/ticket_closed.png';
-  document.getElementById('qrHit').setAttribute('aria-label', qrOpen ? 'Закрити QR' : 'Переглянути QR');
-}
+let paymentTime=Number(localStorage.getItem('paymentTime'));
+let expirationTime=Number(localStorage.getItem('expirationTime'));
+if(!paymentTime){paymentTime=Date.now();localStorage.setItem('paymentTime',String(paymentTime))}
+if(!expirationTime || expirationTime<=paymentTime){expirationTime=paymentTime+3600000;localStorage.setItem('expirationTime',String(expirationTime))}
 
-function openModal() { document.getElementById('modalLayer').classList.add('open'); }
-function closeModal() { document.getElementById('modalLayer').classList.remove('open'); }
-function backdropClose(e) { if (e.target === document.getElementById('modalLayer')) closeModal(); }
+const months=['січ.','лют.','бер.','квіт.','трав.','черв.','лип.','серп.','вер.','жовт.','лист.','груд.'];
+function formatDate(ts){const d=new Date(ts);return String(d.getDate()).padStart(2,'0')+' '+months[d.getMonth()]+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}
+document.getElementById('dateOverlay').textContent=formatDate(paymentTime);
 
-const banner = document.getElementById('paymentSuccess');
-const total = q * 12;
-function ticketWord(n) { const r = n % 100; return (r >= 11 && r <= 14) ? 'квитків' : (n % 10 === 1 ? 'квиток' : (n % 10 >= 2 && n % 10 <= 4 ? 'квитки' : 'квитків')); }
-document.getElementById('paymentSuccessText').textContent = q + ' ' + ticketWord(q) + ' за ' + total + ' UAH';
-requestAnimationFrame(() => banner.classList.add('show'));
-setTimeout(() => banner.classList.remove('show'), 2000);
+function tick(){const left=Math.max(0,expirationTime-Date.now());const sec=Math.floor(left/1000);const mm=Math.floor(sec/60),ss=sec%60;document.getElementById('timerOverlay').textContent=String(mm).padStart(2,'0')+':'+String(ss).padStart(2,'0');if(left<=0)clearInterval(timerId)}
+const timerId=setInterval(tick,250);tick();
+
+let qrOpen=false;
+function toggleQR(){qrOpen=!qrOpen;document.getElementById('ticketBg').src=qrOpen?'images/ticket_open.png':'images/ticket_closed.png';document.getElementById('qrHit').setAttribute('aria-label',qrOpen?'Закрити QR':'Переглянути QR')}
+function openModal(){document.getElementById('modalLayer').classList.add('open')}
+function closeModal(){document.getElementById('modalLayer').classList.remove('open')}
+function backdropClose(e){if(e.target===document.getElementById('modalLayer'))closeModal()}
+
+const banner=document.getElementById('paymentSuccess');
+const total=q*25;
+function ticketWord(n){const r=n%100; return (r>=11&&r<=14)?'квитків':(n%10===1?'квиток':(n%10>=2&&n%10<=4?'квитки':'квитків'));}
+document.getElementById('paymentSuccessText').textContent=q+' '+ticketWord(q)+' за '+total+' UAH';
+requestAnimationFrame(()=>banner.classList.add('show'));
+setTimeout(()=>banner.classList.remove('show'),2000);
 </script>
 </body>
 </html>
