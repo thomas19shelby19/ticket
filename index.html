@@ -2,21 +2,20 @@
 <html lang="uk">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#ffffff">
 <title>Number_ticket</title>
 <link rel="manifest" href="./manifest.json">
 <style>
 *{box-sizing:border-box}
 html,body{margin:0;width:100%;height:100%;overflow:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%}
-body{background:#ffffff;color:#222;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
-.app{width:390px;height:844px;margin:0 auto;padding:114px 17px 30px}
-.card{width:356px;height:77px;background:#fff;border:1px solid #e0e0e0;border-radius:17px;box-shadow:0 2px 8px rgba(0,0,0,.08);padding:0 17px;margin:0 0 12px}
-input{display:block;width:100%;height:77px;border:0;outline:0;background:transparent;padding:0 5px;font:600 36px/1 inherit;color:#222;-webkit-appearance:none;appearance:none;-webkit-text-size-adjust:100%;text-size-adjust:100%;border-radius:0}
-input::placeholder{color:#c9c9c9;opacity:1}
-.next{display:block;width:356px;height:56px;border:0;border-radius:10px;background:#8e8e93;color:#fff;font:600 32px/56px inherit;text-align:center;cursor:pointer;padding:0;-webkit-appearance:none;appearance:none;touch-action:manipulation}
+body{background:#ffffff;color:#222;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+.app{width:100%;max-width:390px;margin:0 auto;padding:114px 17px 30px}
+.card{width:100%;height:77px;background:#fff;border:1px solid #e0e0e0;border-radius:17px;box-shadow:0 2px 8px rgba(0,0,0,.08);padding:0 17px;margin:0 0 12px;display:flex;align-items:center}
+input{display:block;width:100%;height:100%;border:0;outline:0;background:transparent;padding:0 5px;font-size:40px !important;font-weight:600;color:#222;-webkit-appearance:none;appearance:none;border-radius:0}
+input::placeholder{color:#c9c9c9;opacity:1;font-size:30px}
+.next{display:block;width:100%;height:56px;border:0;border-radius:10px;background:#8e8e93;color:#fff;font-size:26px !important;font-weight:600;line-height:56px;text-align:center;cursor:pointer;padding:0;-webkit-appearance:none;appearance:none;touch-action:manipulation}
 .error{color:#c62828;font-size:18px;margin:-3px 4px 12px;display:none}
-@media(max-width:389px){.app{width:100%;padding-left:17px;padding-right:17px}.card,.next{width:100%}}
 </style>
 </head>
 <body>
@@ -40,7 +39,6 @@ function openScanner(){
       window.location.href="page4.html";
       return;
     }
-    // Немає нового номера і ще немає збереженого квитка — не створюємо помилкових даних.
     error.textContent="Немає збереженого квитка";
     error.style.display="block";
     return;
