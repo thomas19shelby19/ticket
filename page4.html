@@ -76,16 +76,17 @@ body{background:#b4d5d2;color:#212121}
 .modal-sheet{position:absolute;left:0;top:82px;width:390px;height:658px;background:#b4d5d2 url('./images/modal_sheet_clean.png') center top/390px 658px no-repeat;border-radius:28px;overflow:hidden}
 .modal-close{position:absolute;left:9px;top:18px;width:55px;height:55px;border:0;background:transparent;padding:0;cursor:pointer;z-index:4}
 
-/* СТИЛІ НИЖНЬОЇ ПАНЕЛІ (ПІДНЯТО ТА ЗМЕНШЕНО ШИРИНУ) */
+/* СТИЛІ НИЖНЬОЇ ПАНЕЛІ (СКОРОЧЕНО ТА НАБЛИЖЕНО КНОПКИ) */
 .browser-bar {
   position: absolute;
-  bottom: 18px; /* Піднято вище */
-  left: 16px;
-  width: 358px;
+  bottom: 18px;
+  left: 0;
+  width: 390px;
   height: 42px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 8px; /* Кнопки ближче до адресної стрічки */
   z-index: 50;
 }
 
@@ -105,7 +106,7 @@ body{background:#b4d5d2;color:#212121}
 }
 
 .browser-url-pill {
-  width: 242px; /* Коротша адресна стрічка */
+  width: 210px; /* Додатково скорочено */
   height: 42px;
   border-radius: 21px;
   background: rgba(255, 255, 255, 0.22);
@@ -134,7 +135,7 @@ body{background:#b4d5d2;color:#212121}
   background: transparent;
   border: none;
   outline: none;
-  font-size: 14.5px;
+  font-size: 14px;
   font-weight: 400;
   color: #ffffff;
   font-family: 'Roboto', sans-serif;
